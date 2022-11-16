@@ -78,18 +78,21 @@ size_t createGraphNodes(Node *node, FILE *fp)
 
     size_t error = TREE_NO_ERRORS;
 
+    char node_value[BUFFER_SIZE] = "";
+    getValueOfNode(node, &node_value);
+
     fprintf(fp,
             "    node_%p[shape=\"record\", \n"
             "        color=%s,"
             "        fillcolor=%s, \n"
             "        style=\"rounded, filled\", \n"
             "        label=\"\n"
-            "            {%s? |\n"
+            "            {%s |\n"
             "            {{LEFT | %p} | {INDEX | %p} | {RIGHT | %p}}}\"]\n",
             node,
             GREEN_COLOR,
             LIGHT_GREEN_COLOR,
-            node->value,
+            node_value,
             node->left,
             node,
             node->right);
@@ -117,7 +120,7 @@ size_t createGraphEdges(Node *node, FILE *fp)
     if (node->left)
     {
         fprintf(fp,
-                "    node_%p->node_%p[label=\"YES\", color=%s, fontcolor=%s];",
+                "    node_%p->node_%p[color=%s, fontcolor=%s];",
                 node,
                 node->left,
                 PURPLE_COLOR,
@@ -130,7 +133,7 @@ size_t createGraphEdges(Node *node, FILE *fp)
     if (node->right)
     {
         fprintf(fp,
-                "    node_%p->node_%p[label=\"NO\",  color=%s, fontcolor=%s];",
+                "    node_%p->node_%p[color=%s, fontcolor=%s];",
                 node,
                 node->right,
                 PURPLE_COLOR,
@@ -141,4 +144,49 @@ size_t createGraphEdges(Node *node, FILE *fp)
     }
 
     return TREE_NO_ERRORS;
+}
+
+void getValueOfNode(Node *node, char (*node_value)[BUFFER_SIZE])
+{
+    switch (node->node_type)
+    {
+        case OPERATION:
+            switch (node->op_value)
+            {
+                case PLUS_OP:
+                    *node_value[0] = '+';
+                    break;
+                case SUB_OP:
+                    *node_value[0] = '-';
+                    break;
+                case MUL_OP:
+                    *node_value[0] = '*';
+                    break;
+                case DIV_OP:
+                    *node_value[0] = '/';
+                    break;
+                case POW_OP:
+                    *node_value[0] = '^';
+                    break;
+                case INCORRECT_OP:
+                    *node_value[0] = '?';
+                    break;
+                default:
+                    *node_value[0] = ' ';
+                    break;
+            }
+            break;
+        case NUMBER:
+            sprintf(*node_value, "%lg", node->val_value);
+            break;
+        case VARIABLE:
+            sprintf(*node_value, "%c", node->var_value);
+            break;
+        case INCORRECT_TYPE:
+            sprintf(*node_value, "%s", "INCORRECT_TYPE");
+            break;
+        default:
+            fprintf(stderr, "Unknown type %d", node->node_type);
+            break;
+    }
 }
