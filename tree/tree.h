@@ -11,6 +11,8 @@
 #include <cctype>
 
 const size_t BUFFER_SIZE = 1024;
+const double EXP = exp(1);
+const double EPS = 1e-5;
 
 enum NodeType
 {
@@ -23,11 +25,14 @@ enum NodeType
 enum OperationType
 {
     INCORRECT_OP = -1,
-    PLUS_OP = 0,
+    ADD_OP = 0,
     SUB_OP = 1,
     MUL_OP = 2,
     DIV_OP = 3,
     POW_OP = 4,
+    LOG_OP = 5,
+    SIN_OP = 6,
+    COS_OP = 7,
 };
 
 struct Node

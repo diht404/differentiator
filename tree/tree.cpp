@@ -41,108 +41,6 @@ size_t nodeDtor(Node *node)
     return TREE_NO_ERRORS;
 }
 
-//size_t treeSaveToFile(Tree *tree, FILE *fp)
-//{
-//    CHECK_NULLPTR_ERROR(tree, TREE_IS_NULLPTR)
-//
-//    return nodePreOrderPrint(tree->root, fp, 0);
-//}
-//
-//size_t nodePreOrderPrint(Node *node, FILE *fp, size_t num_spaces)
-//{
-//    CHECK_NULLPTR_ERROR(node, NODE_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(fp, FILE_IS_NULLPTR)
-//
-//    size_t error = TREE_NO_ERRORS;
-//
-//    for (size_t i = 0; i < num_spaces; i++)
-//    {
-//        fprintf(fp, " ");
-//    }
-//
-//    if (node->left == nullptr and node->right == nullptr)
-//    {
-//        fprintf(fp, "{ %s }\n", node->value);
-//        return TREE_NO_ERRORS;
-//    }
-//    else
-//        fprintf(fp, "{ %s \n", node->value);
-//
-//    if (node->left)
-//        error = nodePreOrderPrint(node->left,
-//                                  fp,
-//                                  num_spaces + LOGS_NUM_SPACES);
-//    if (error)
-//        return error;
-//
-//    if (node->right)
-//        error = nodePreOrderPrint(node->right,
-//                                  fp,
-//                                  num_spaces + LOGS_NUM_SPACES);
-//    if (error)
-//        return error;
-//
-//    for (size_t i = 0; i < num_spaces; i++)
-//    {
-//        fprintf(fp, " ");
-//    }
-//    fprintf(fp, "}\n");
-//
-//    return TREE_NO_ERRORS;
-//}
-//
-//size_t nodeInOrderPrint(Node *node, FILE *fp, size_t num_spaces)
-//{
-//    CHECK_NULLPTR_ERROR(node, NODE_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(fp, FILE_IS_NULLPTR)
-//
-//    size_t error = TREE_NO_ERRORS;
-//
-//    if (node->left)
-//        error = nodeInOrderPrint(node->left,
-//                                 fp,
-//                                 num_spaces);
-//    if (error)
-//        return error;
-//
-//    fprintf(fp, "%s\n", node->value);
-//
-//    if (node->right)
-//        error = nodeInOrderPrint(node->right,
-//                                 fp,
-//                                 num_spaces);
-//    if (error)
-//        return error;
-//
-//    return TREE_NO_ERRORS;
-//}
-//
-//size_t nodePostOrderPrint(Node *node, FILE *fp, size_t num_spaces)
-//{
-//    CHECK_NULLPTR_ERROR(node, NODE_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(fp, FILE_IS_NULLPTR)
-//
-//    size_t error = TREE_NO_ERRORS;
-//
-//    if (node->left)
-//        error = nodePostOrderPrint(node->left,
-//                                   fp,
-//                                   num_spaces);
-//    if (error)
-//        return error;
-//
-//    if (node->right)
-//        error = nodePostOrderPrint(node->right,
-//                                   fp,
-//                                   num_spaces);
-//    if (error)
-//        return error;
-//
-//    fprintf(fp, "%s \n", node->value);
-//
-//    return TREE_NO_ERRORS;
-//}
-
 size_t readTree(Tree *tree, const char *filename)
 {
     CHECK_NULLPTR_ERROR(tree, TREE_IS_NULLPTR)
@@ -212,7 +110,7 @@ Node *readNode(char **readPtr, char **buffer, long lenOfFile)
             {
                 case '+':
                     node_type = OPERATION;
-                    op_type = PLUS_OP;
+                    op_type = ADD_OP;
                     (*readPtr)++;
                     break;
                 case '-':
@@ -235,6 +133,21 @@ Node *readNode(char **readPtr, char **buffer, long lenOfFile)
                     op_type = POW_OP;
                     (*readPtr)++;
                     break;
+                case 'l':
+                    node_type = OPERATION;
+                    op_type = LOG_OP;
+                    (*readPtr)++;
+                    break;
+                case 's':
+                    node_type = OPERATION;
+                    op_type = SIN_OP;
+                    (*readPtr)++;
+                    break;
+                case 'c':
+                    node_type = OPERATION;
+                    op_type = COS_OP;
+                    (*readPtr)++;
+                    break;
                 default:
                     variable = **readPtr;
                     (*readPtr)++;
@@ -251,7 +164,12 @@ Node *readNode(char **readPtr, char **buffer, long lenOfFile)
             }
         }
     }
-    return createNewNode(OPERATION, NAN, op_type, 'a', left_node, right_node);
+    return createNewNode(OPERATION,
+                         NAN,
+                         op_type,
+                         'a',
+                         left_node,
+                         right_node);
 }
 
 Node *createNewNode(NodeType node_type,
@@ -283,105 +201,3 @@ Node *createNewNode(NodeType node_type,
     }
     return node;
 }
-
-
-//size_t createNode(Node **new_node,
-//                  Tree *tree,
-//                  Node *node,
-//                  char **startTokenPtr,
-//                  char **endTokenPtr)
-//{
-//    CHECK_NULLPTR_ERROR(new_node, NODE_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(tree, TREE_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(node, NODE_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(startTokenPtr, STRING_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(*startTokenPtr, STRING_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(endTokenPtr, STRING_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(*endTokenPtr, STRING_IS_NULLPTR)
-//
-//    size_t error = TREE_NO_ERRORS;
-//    if (node == tree->root and tree->size == 0)
-//        *new_node = tree->root;
-//    else
-//        *new_node = (Node *) calloc(1, sizeof(Node));
-//    nodeCtor(*new_node);
-//
-//    if (tree->root->value != nullptr)
-//        error = createNoRootNode(node, *new_node);
-//    if  (error) return error;
-//
-//    error = setNodeValue(tree, *new_node, startTokenPtr, endTokenPtr);
-//    tree->size++;
-//
-//    return error;
-//}
-//
-//size_t setNodeValue(Tree *tree,
-//                    Node *new_node,
-//                    char **startTokenPtr,
-//                    char **endTokenPtr)
-//{
-//    CHECK_NULLPTR_ERROR(tree, TREE_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(new_node, NODE_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(startTokenPtr, STRING_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(*startTokenPtr, STRING_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(endTokenPtr, STRING_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(*endTokenPtr, STRING_IS_NULLPTR)
-//
-//    if (**startTokenPtr == '\"')
-//        (*startTokenPtr)++;
-//    if (**endTokenPtr == '\"')
-//        (*endTokenPtr)--;
-//
-//    new_node->value =
-//        (char *) calloc(*endTokenPtr - *startTokenPtr + 1,
-//                        sizeof(new_node->value[0]));
-//    CHECK_NULLPTR_ERROR(new_node->value,
-//                        TREE_CANT_ALLOCATE_MEMORY)
-//    memcpy(new_node->value,
-//           *startTokenPtr,
-//           *endTokenPtr - *startTokenPtr + 1);
-//    return TREE_NO_ERRORS;
-//}
-//
-//size_t createNoRootNode(Node *node, Node *new_node)
-//{
-//    CHECK_NULLPTR_ERROR(node, NODE_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(new_node, NODE_IS_NULLPTR)
-//
-//    if (node->left == nullptr)
-//        node->left = new_node;
-//    else if (node->right == nullptr)
-//        node->right = new_node;
-//    else
-//        fprintf(stderr,
-//                "Both is not NULLPTR\n");
-//}
-//
-//size_t insertNode(Node *node,
-//                  char *value,
-//                  size_t value_size,
-//                  char *delimiter,
-//                  size_t delimiter_size)
-//{
-//    CHECK_NULLPTR_ERROR(node, NODE_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(value, STRING_IS_NULLPTR)
-//    CHECK_NULLPTR_ERROR(delimiter, STRING_IS_NULLPTR)
-//
-//    node->left = (Node *) calloc(1, sizeof(Node));
-//    CHECK_NULLPTR_ERROR(node->left, TREE_CANT_ALLOCATE_MEMORY)
-//    nodeCtor(node->left);
-//
-//    node->right = (Node *) calloc(1, sizeof(Node));
-//    CHECK_NULLPTR_ERROR(node->right, TREE_CANT_ALLOCATE_MEMORY)
-//    nodeCtor(node->right);
-//
-//    node->right->value = node->value;
-//
-//    node->left->value = (char *) calloc(1, value_size);
-//    memcpy(node->left->value, value, value_size);
-//    node->value = (char *) calloc(1, delimiter_size);
-//    memcpy(node->value, delimiter, delimiter_size);
-//
-//    return TREE_NO_ERRORS;
-//}

@@ -153,7 +153,7 @@ void getValueOfNode(Node *node, char (*node_value)[BUFFER_SIZE])
         case OPERATION:
             switch (node->op_value)
             {
-                case PLUS_OP:
+                case ADD_OP:
                     *node_value[0] = '+';
                     break;
                 case SUB_OP:
@@ -167,6 +167,15 @@ void getValueOfNode(Node *node, char (*node_value)[BUFFER_SIZE])
                     break;
                 case POW_OP:
                     *node_value[0] = '^';
+                    break;
+                case LOG_OP:
+                    sprintf(*node_value, "%s", "log");
+                    break;
+                case SIN_OP:
+                    sprintf(*node_value, "%s", "sin");
+                    break;
+                case COS_OP:
+                    sprintf(*node_value, "%s", "cos");
                     break;
                 case INCORRECT_OP:
                     *node_value[0] = '?';

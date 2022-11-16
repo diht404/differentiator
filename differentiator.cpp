@@ -1,5 +1,139 @@
 #include "differentiator.h"
 
+Node *diff(const Node *node)
+{
+    switch (node->node_type)
+    {
+        case NUMBER:
+            return createNum(0);
+        case VARIABLE:
+            return createNum(1);
+        case OPERATION:
+            switch (node->op_value)
+            {
+                case ADD_OP:
+                    return ADD(dL, dR);
+                case SUB_OP:
+                    return SUB(dL, dR);
+                case MUL_OP:
+                    return ADD(MUL(dL, cR),
+                               MUL(cL, dR));
+                case DIV_OP:
+                    return DIV(SUB(MUL(dL, cR),
+                                   MUL(cL, dR)),
+                               MUL(cR, cR));
+                case POW_OP:
+                    return diffPop(node);
+                case LOG_OP:
+                    return diffLog(node);
+                case SIN_OP:
+                    return MUL(COS(createNum(0), cR), dR);
+                case COS_OP:
+                    return MUL(SUB(createNum(-1),
+                                   SIN(createNum(0), cR)), dR);
+            }
+    }
+}
+
+Node *diffLog(const Node *node)
+{
+    // log_a(b)
+    if (node->left->node_type == NUMBER &&
+        node->right->node_type == NUMBER)
+        return createNum(0);
+        // log_a(f(x))
+    else if (node->left->node_type == NUMBER &&
+        node->right->node_type != NUMBER)
+        return DIV(dR, MUL(LOG(createNum(EXP), cL), cR));
+        // log_f(x)(g(x))
+    else
+        return DIV(SUB(DIV(MUL(LOG(createNum(EXP), cL), dR), cR),
+                       DIV(MUL(LOG(createNum(EXP), cR), dL), cL)),
+                   MUL(LOG(createNum(EXP), cL),
+                       LOG(createNum(EXP), cL)));
+}
+
+Node *diffPop(const Node *node)
+{
+    // a^b
+    if (node->left->node_type == NUMBER &&
+        node->right->node_type == NUMBER)
+        return createNum(0);
+        // f(x)^1
+    else if (node->left->node_type != NUMBER &&
+        node->right->node_type == NUMBER &&
+        abs(node->right->val_value - 1) < EPS)
+        return dL;
+        // f(x)^a, a != 1
+    else if (node->left->node_type != NUMBER &&
+        node->right->node_type == NUMBER &&
+        abs(node->right->val_value - 1) >= EPS)
+        return MUL(MUL(cR, dL),
+                   POW(cL, SUB(cR, createNum(1))));
+        // a^f(x)
+    else if (node->left->node_type == NUMBER &&
+        node->right->node_type != NUMBER)
+        return MUL(MUL(LOG(createNum(EXP), cL), dR),
+                   POW(cL, cR));
+        // f(x)^g(x)
+    else
+        return MUL(POW(cL, SUB(cR, createNum(1))),
+                   ADD(MUL(cR, dL),
+                       MUL(MUL(cL, dR),
+                           LOG(createNum(EXP), cL))));
+}
+
+Node *createNum(double value)
+{
+    Node *node = (Node *) calloc(1, sizeof(node[0]));
+    node->left = nullptr;
+    node->right = nullptr;
+    node->node_type = NUMBER;
+    node->op_value = INCORRECT_OP;
+    node->var_value = ' ';
+    node->val_value = value;
+
+    return node;
+}
+
+Node *createNode(NodeType node_type,
+                 OperationType op_type,
+                 Node *left_node,
+                 Node *right_node)
+{
+    Node *node = (Node *) calloc(1, sizeof(node[0]));
+    node->left = left_node;
+    node->right = right_node;
+    node->node_type = node_type;
+    if (node_type == OPERATION)
+    {
+        node->op_value = op_type;
+    }
+    else
+    {
+        fprintf(stderr, "Incorrect node type %d\n", node_type);
+    }
+}
+
+Node *copyNode(Node *node)
+{
+    Node *new_node = (Node *) calloc(1, sizeof(new_node[0]));
+    *new_node = *node;
+
+    Node *new_left = nullptr;
+    Node *new_right = nullptr;
+    if (new_node->left)
+        new_left = copyNode(node->left);
+
+    if (new_node->right)
+        new_right = copyNode(node->right);
+
+    new_node->left = new_left;
+    new_node->right = new_right;
+
+    return new_node;
+}
+
 void printLatex(Tree *tree)
 {
     FILE *fp = fopen("matan.tex", "w");
