@@ -26,9 +26,6 @@ const char LATEX_START_DOCUMENT[] =
     "\\usepackage{hyperref}\n"
     "\n"
     "\\oddsidemargin=6mm\n"
-    "\\textwidth=150mm\n"
-    "\\headheight=-32.4mm\n"
-    "\\textheight=277mm\n"
     "\n"
     "\\parindent=0pt\n"
     "\\parskip=8pt\n"
@@ -44,7 +41,10 @@ const char LATEX_START_DOCUMENT[] =
     "\n"
     "\\flushbottom"
     "\n"
-    "\\begin{document}";
+    "\\begin{document}"
+    ""
+    "Решим элементарную задачу на дифференцирование, которую автор "
+    "данного учебника решал еще в 5 классе.\n\n";
 
 const char LATEX_END_DOCUMENT[] = "\\end{document}";
 
@@ -93,6 +93,20 @@ Node *copyNode(Node *node);
 void printLatex(Tree *tree);
 
 void printLatexNode(const Node *node, FILE *fp);
+
+void printLatexSinNode(const Node *node, FILE *fp);
+
+void printLatexCosNode(const Node *node, FILE *fp);
+
+void printLatexLogNode(const Node *node, FILE *fp);
+
+void printLatexDivNode(const Node *node, FILE *fp);
+
+void printLatexPowNode(const Node *node, FILE *fp);
+
+void printLatexOrdinaryNode(const Node *node,
+                            char node_value[BUFFER_SIZE],
+                            FILE *fp);
 
 #define dL diff(node->left)
 #define dR diff(node->right)

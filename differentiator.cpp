@@ -43,27 +43,29 @@ Node *diff(const Node *node)
     {
         case NUMBER:
             return_node = createNum(0);
-            break; return return_node;
+            break;
         case VARIABLE:
             return_node = createNum(1);
-            break; return return_node;
+            break;
         case OPERATION:
             return_node = diffOperation(node);
-            break; return return_node;
+            break;
         case INCORRECT_TYPE:
-            fprintf(stderr, "Incorrect node type.");
-            break; return nullptr;
+            fprintf(stderr, "Incorrect node type.\n");
+            break;
         default:
-            fprintf(stderr, "Unknown node type.");
-            break; return nullptr;
+            fprintf(stderr, "Unknown node type.\n");
+            break;
     }
+    fprintf(LATEX_FILE, "\n");
     addRandomCringePhrase();
 
-    fprintf(LATEX_FILE, "\n$$");
+    fprintf(LATEX_FILE, "\n");
+    fprintf(LATEX_FILE, "$");
     printLatexNode(node, LATEX_FILE);
     fprintf(LATEX_FILE, "' = ");
     printLatexNode(return_node, LATEX_FILE);
-    fprintf(LATEX_FILE, "$$\n");
+    fprintf(LATEX_FILE, "$\n");
     return return_node;
 }
 
@@ -92,10 +94,10 @@ Node *diffOperation(const Node *node)
             return MUL(SUB(createNum(-1),
                            SIN(createNum(0), cR)), dR);
         case INCORRECT_OP:
-            fprintf(stderr, "Incorrect operation.");
+            fprintf(stderr, "Incorrect operation.\n");
             return nullptr;
         default:
-            fprintf(stderr, "Unknown operation.");
+            fprintf(stderr, "Unknown operation.\n");
             return nullptr;
     }
 }
@@ -191,34 +193,89 @@ Node *copyNode(Node *node)
 
 void printLatex(Tree *tree)
 {
-    fprintf(LATEX_FILE, "$$");
+    fprintf(LATEX_FILE, "$");
     printLatexNode(tree->root, LATEX_FILE);
-    fprintf(LATEX_FILE, "$$\n");
+    fprintf(LATEX_FILE, "'$\n");
 }
 
 void printLatexNode(const Node *node, FILE *fp)
 {
     char node_value[BUFFER_SIZE] = "";
     getValueOfNode(node, &node_value);
-
-    if (strcmp(node_value, "^") == 0)
-        fprintf(fp, "{");
+    if (strcmp(node_value, "sin") == 0)
+        printLatexSinNode(node, fp);
+    else if (strcmp(node_value, "cos") == 0)
+        printLatexCosNode(node, fp);
+    else if (strcmp(node_value, "log") == 0)
+        printLatexLogNode(node, fp);
+    else if (strcmp(node_value, "/") == 0)
+        printLatexDivNode(node, fp);
+    else if (strcmp(node_value, "^") == 0)
+        printLatexPowNode(node, fp);
     else
-        fprintf(fp, "(");
+        printLatexOrdinaryNode(node, node_value, fp);
+}
+
+void printLatexSinNode(const Node *node, FILE *fp)
+{
+    fprintf(fp, "sin");
+    if (node->right)
+        printLatexNode(node->right, fp);
+}
+
+void printLatexCosNode(const Node *node, FILE *fp)
+{
+    fprintf(fp, "cos");
+    if (node->right)
+        printLatexNode(node->right, fp);
+}
+
+void printLatexLogNode(const Node *node, FILE *fp)
+{
+    fprintf(fp, "\\log_{");
     if (node->left)
         printLatexNode(node->left, fp);
-    if (strcmp(node_value, "^") == 0)
-        fprintf(fp, "}");
+    fprintf(fp, "}");
 
-    fprintf(fp, "%s", node_value);
+    fprintf(fp, "{");
+    if (node->right)
+        printLatexNode(node->right, fp);
+    fprintf(fp, "}");
+}
 
-    if (strcmp(node_value, "^") == 0)
-        fprintf(fp, "{");
+void printLatexDivNode(const Node *node, FILE *fp)
+{
+    fprintf(fp, "\\frac{");
+    if (node->left)
+        printLatexNode(node->left, fp);
+    fprintf(fp, "}{");
+    if (node->right)
+        printLatexNode(node->right, fp);
+    fprintf(fp, "}\n");
+}
+
+void printLatexPowNode(const Node *node, FILE *fp)
+{
+    fprintf(fp, "{");
+    if (node->left)
+        printLatexNode(node->left, fp);
+    fprintf(fp, "}^{");
+    if (node->right)
+        printLatexNode(node->right, fp);
+    fprintf(fp, "}");
+}
+
+void printLatexOrdinaryNode(const Node *node,
+                            char node_value[BUFFER_SIZE],
+                            FILE *fp)
+{
+    fprintf(fp, "(");
+    if (node->left)
+        printLatexNode(node->left, fp);
+
+    fprintf(fp, " %s ", node_value);
 
     if (node->right)
         printLatexNode(node->right, fp);
-    if (strcmp(node_value, "^") == 0)
-        fprintf(fp, "}");
-    else
-        fprintf(fp, ")");
+    fprintf(fp, ")");
 }
