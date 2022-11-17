@@ -56,7 +56,7 @@ Node *diffPop(const Node *node);
 Node *createNum(double value);
 
 Node *createNode(NodeType node_type,
-                 OperationType op_type,
+                 NodeValue node_value,
                  Node *left_node,
                  Node *right_node);
 
@@ -70,13 +70,13 @@ void printLatexNode(Node *node, FILE *fp);
 #define dR diff(node->right)
 #define cL copyNode(node->left)
 #define cR copyNode(node->right)
-#define ADD(dL, dR) createNode(OPERATION, ADD_OP, dL, dR)
-#define SUB(dL, dR) createNode(OPERATION, SUB_OP, dL, dR)
-#define MUL(dL, dR) createNode(OPERATION, MUL_OP, dL, dR)
-#define DIV(dL, dR) createNode(OPERATION, DIV_OP, dL, dR)
-#define POW(dL, dR) createNode(OPERATION, POW_OP, dL, dR)
-#define LOG(dL, dR) createNode(OPERATION, LOG_OP, dL, dR)
-#define SIN(dL, dR) createNode(OPERATION, SIN_OP, dL, dR)
-#define COS(dL, dR) createNode(OPERATION, COS_OP, dL, dR)
+#define ADD(dL, dR) createNode(OPERATION, {.op_value = ADD_OP}, dL, dR)
+#define SUB(dL, dR) createNode(OPERATION, {.op_value = SUB_OP}, dL, dR)
+#define MUL(dL, dR) createNode(OPERATION, {.op_value = MUL_OP}, dL, dR)
+#define DIV(dL, dR) createNode(OPERATION, {.op_value = DIV_OP}, dL, dR)
+#define POW(dL, dR) createNode(OPERATION, {.op_value = POW_OP}, dL, dR)
+#define LOG(dL, dR) createNode(OPERATION, {.op_value = LOG_OP}, dL, dR)
+#define SIN(dL, dR) createNode(OPERATION, {.op_value = SIN_OP}, dL, dR)
+#define COS(dL, dR) createNode(OPERATION, {.op_value = COS_OP}, dL, dR)
 
 #endif //DIFFERENTIATOR__DIFFERENTIATOR_H

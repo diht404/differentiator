@@ -9,7 +9,7 @@ Node *diff(const Node *node)
         case VARIABLE:
             return createNum(1);
         case OPERATION:
-            switch (node->op_value)
+            switch (node->value.op_value)
             {
                 case ADD_OP:
                     return ADD(dL, dR);
@@ -31,7 +31,19 @@ Node *diff(const Node *node)
                 case COS_OP:
                     return MUL(SUB(createNum(-1),
                                    SIN(createNum(0), cR)), dR);
+                case INCORRECT_OP:
+                    fprintf(stderr, "Incorrect operation.");
+                    return nullptr;
+                default:
+                    fprintf(stderr, "Unknown operation.");
+                    return nullptr;
             }
+        case INCORRECT_TYPE:
+            fprintf(stderr, "Incorrect node type.");
+            return nullptr;
+        default:
+            fprintf(stderr, "Unknown node type.");
+            return nullptr;
     }
 }
 
@@ -62,12 +74,12 @@ Node *diffPop(const Node *node)
         // f(x)^1
     else if (node->left->node_type != NUMBER &&
         node->right->node_type == NUMBER &&
-        abs(node->right->val_value - 1) < EPS)
+        abs(node->right->value.val_value - 1) < EPS)
         return dL;
         // f(x)^a, a != 1
     else if (node->left->node_type != NUMBER &&
         node->right->node_type == NUMBER &&
-        abs(node->right->val_value - 1) >= EPS)
+        abs(node->right->value.val_value - 1) >= EPS)
         return MUL(MUL(cR, dL),
                    POW(cL, SUB(cR, createNum(1))));
         // a^f(x)
@@ -89,15 +101,13 @@ Node *createNum(double value)
     node->left = nullptr;
     node->right = nullptr;
     node->node_type = NUMBER;
-    node->op_value = INCORRECT_OP;
-    node->var_value = ' ';
-    node->val_value = value;
+    node->value.val_value = value;
 
     return node;
 }
 
 Node *createNode(NodeType node_type,
-                 OperationType op_type,
+                 NodeValue node_value,
                  Node *left_node,
                  Node *right_node)
 {
@@ -105,14 +115,7 @@ Node *createNode(NodeType node_type,
     node->left = left_node;
     node->right = right_node;
     node->node_type = node_type;
-    if (node_type == OPERATION)
-    {
-        node->op_value = op_type;
-    }
-    else
-    {
-        fprintf(stderr, "Incorrect node type %d\n", node_type);
-    }
+    node->value = node_value;
 }
 
 Node *copyNode(Node *node)

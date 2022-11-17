@@ -151,7 +151,7 @@ void getValueOfNode(Node *node, char (*node_value)[BUFFER_SIZE])
     switch (node->node_type)
     {
         case OPERATION:
-            switch (node->op_value)
+            switch (node->value.op_value)
             {
                 case ADD_OP:
                     *node_value[0] = '+';
@@ -186,10 +186,10 @@ void getValueOfNode(Node *node, char (*node_value)[BUFFER_SIZE])
             }
             break;
         case NUMBER:
-            sprintf(*node_value, "%lg", node->val_value);
+            sprintf(*node_value, "%lg", node->value.val_value);
             break;
         case VARIABLE:
-            sprintf(*node_value, "%c", node->var_value);
+            sprintf(*node_value, "%c", node->value.var_value);
             break;
         case INCORRECT_TYPE:
             sprintf(*node_value, "%s", "INCORRECT_TYPE");

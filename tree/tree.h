@@ -35,13 +35,22 @@ enum OperationType
     COS_OP = 7,
 };
 
+union NodeValue
+{
+    double val_value;
+    OperationType op_value;
+    char var_value;
+};
+
 struct Node
 {
     NodeType node_type = INCORRECT_TYPE;
 
-    double val_value = 0;
-    OperationType op_value = INCORRECT_OP;
-    char var_value = 0;
+    NodeValue value = {.val_value = NAN};
+
+//    double val_value = 0;
+//    OperationType op_value = INCORRECT_OP;
+//    char var_value = 0;
 
 //    Val_t value = nullptr;
     Node *left = nullptr;
@@ -56,16 +65,16 @@ struct Tree
 
 enum TreeErrors
 {
-    TREE_NO_ERRORS            = 0,
-    TREE_IS_NULLPTR           = 1,
-    NODE_IS_NULLPTR           = 2,
-    TREE_FILENAME_IS_NULLPTR  = 3,
-    CANT_OPEN_TREE_FILE       = 4,
+    TREE_NO_ERRORS = 0,
+    TREE_IS_NULLPTR = 1,
+    NODE_IS_NULLPTR = 2,
+    TREE_FILENAME_IS_NULLPTR = 3,
+    CANT_OPEN_TREE_FILE = 4,
     TREE_CANT_ALLOCATE_MEMORY = 5,
-    TREE_NO_SUCH_ELEMENT      = 6,
+    TREE_NO_SUCH_ELEMENT = 6,
     TOO_MANY_ATTEMPTS_TO_READ = 7,
-    STRING_IS_NULLPTR         = 8,
-    FILE_IS_NULLPTR           = 9,
+    STRING_IS_NULLPTR = 8,
+    FILE_IS_NULLPTR = 9,
 };
 
 /**
@@ -151,9 +160,10 @@ size_t readTree(Tree *tree, const char *filename);
 Node *readNode(char **readPtr, char **buffer, long lenOfFile);
 
 Node *createNewNode(NodeType node_type,
-                    double value,
-                    OperationType op_type,
-                    char variable,
+                    NodeValue node_value,
+//                    double value,
+//                    OperationType op_type,
+//                    char variable,
                     Node *left_node,
                     Node *right_node);
 

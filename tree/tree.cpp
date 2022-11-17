@@ -97,9 +97,7 @@ Node *readNode(char **readPtr, char **buffer, long lenOfFile)
             // bracket ) after value
             (*readPtr)++;
             Node *new_node = createNewNode(NUMBER,
-                                           value,
-                                           INCORRECT_OP,
-                                           'a',
+                                           {.val_value = value},
                                            nullptr,
                                            nullptr);
             return new_node;
@@ -153,10 +151,9 @@ Node *readNode(char **readPtr, char **buffer, long lenOfFile)
                     (*readPtr)++;
                     // bracket ) after variable
                     (*readPtr)++;
+//                    NodeValue node_value = {.var_value = variable};
                     Node *new_node = createNewNode(VARIABLE,
-                                                   NAN,
-                                                   INCORRECT_OP,
-                                                   variable,
+                                                   {.var_value = variable},
                                                    nullptr,
                                                    nullptr);
 //                    fprintf(stderr, "NODE_TYPE = %d\n", new_node->node_type);
@@ -165,17 +162,16 @@ Node *readNode(char **readPtr, char **buffer, long lenOfFile)
         }
     }
     return createNewNode(OPERATION,
-                         NAN,
-                         op_type,
-                         'a',
+                         {.op_value = op_type},
                          left_node,
                          right_node);
 }
 
 Node *createNewNode(NodeType node_type,
-                    double value,
-                    OperationType op_type,
-                    char variable,
+                    NodeValue node_value,
+//                    double value,
+//                    OperationType op_type,
+//                    char variable,
                     Node *left_node,
                     Node *right_node)
 {
@@ -183,21 +179,22 @@ Node *createNewNode(NodeType node_type,
     node->left = left_node;
     node->right = right_node;
     node->node_type = node_type;
-    if (node_type == OPERATION)
-    {
-        node->op_value = op_type;
-    }
-    else if (node_type == VARIABLE)
-    {
-        node->var_value = variable;
-    }
-    else if (node_type == NUMBER)
-    {
-        node->val_value = value;
-    }
-    else
-    {
-        fprintf(stderr, "Incorrect node type %d\n", node_type);
-    }
+    node->value = node_value;
+//    if (node_type == OPERATION)
+//    {
+//        node->value.op_value = op_type;
+//    }
+//    else if (node_type == VARIABLE)
+//    {
+//        node->value.var_value = variable;
+//    }
+//    else if (node_type == NUMBER)
+//    {
+//        node->value.val_value = value;
+//    }
+//    else
+//    {
+//        fprintf(stderr, "Incorrect node type %d\n", node_type);
+//    }
     return node;
 }
