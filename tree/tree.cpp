@@ -62,12 +62,8 @@ size_t readTree(Tree *tree, const char *filename)
 
 Node *readNode(char **readPtr, char **buffer, long lenOfFile)
 {
-    NodeType node_type = INCORRECT_TYPE;
     OperationType op_type = INCORRECT_OP;
-    char variable = 'a';
-    double value = NAN;
 
-    Node *node = nullptr;
     Node *left_node = nullptr;
     Node *right_node = nullptr;
     while (*readPtr < *buffer + lenOfFile)
@@ -91,6 +87,7 @@ Node *readNode(char **readPtr, char **buffer, long lenOfFile)
         else if (isdigit(**readPtr))
         {
             int len = 0;
+            double value = NAN;
             sscanf(*readPtr, "%lf %n", &value, &len);
             // len of value
             (*readPtr) += len;
@@ -107,56 +104,45 @@ Node *readNode(char **readPtr, char **buffer, long lenOfFile)
             switch (**readPtr)
             {
                 case '+':
-                    node_type = OPERATION;
                     op_type = ADD_OP;
                     (*readPtr)++;
                     break;
                 case '-':
-                    node_type = OPERATION;
                     op_type = SUB_OP;
                     (*readPtr)++;
                     break;
                 case '*':
-                    node_type = OPERATION;
                     op_type = MUL_OP;
                     (*readPtr)++;
                     break;
                 case '/':
-                    node_type = OPERATION;
                     op_type = DIV_OP;
                     (*readPtr)++;
                     break;
                 case '^':
-                    node_type = OPERATION;
                     op_type = POW_OP;
                     (*readPtr)++;
                     break;
                 case 'l':
-                    node_type = OPERATION;
                     op_type = LOG_OP;
                     (*readPtr)++;
                     break;
                 case 's':
-                    node_type = OPERATION;
                     op_type = SIN_OP;
                     (*readPtr)++;
                     break;
                 case 'c':
-                    node_type = OPERATION;
                     op_type = COS_OP;
                     (*readPtr)++;
                     break;
                 default:
-                    variable = **readPtr;
+                    Node *new_node = createNewNode(VARIABLE,
+                                                   {.var_value = **readPtr},
+                                                   nullptr,
+                                                   nullptr);
                     (*readPtr)++;
                     // bracket ) after variable
                     (*readPtr)++;
-//                    NodeValue node_value = {.var_value = variable};
-                    Node *new_node = createNewNode(VARIABLE,
-                                                   {.var_value = variable},
-                                                   nullptr,
-                                                   nullptr);
-//                    fprintf(stderr, "NODE_TYPE = %d\n", new_node->node_type);
                     return new_node;
             }
         }
@@ -169,9 +155,6 @@ Node *readNode(char **readPtr, char **buffer, long lenOfFile)
 
 Node *createNewNode(NodeType node_type,
                     NodeValue node_value,
-//                    double value,
-//                    OperationType op_type,
-//                    char variable,
                     Node *left_node,
                     Node *right_node)
 {
@@ -180,21 +163,5 @@ Node *createNewNode(NodeType node_type,
     node->right = right_node;
     node->node_type = node_type;
     node->value = node_value;
-//    if (node_type == OPERATION)
-//    {
-//        node->value.op_value = op_type;
-//    }
-//    else if (node_type == VARIABLE)
-//    {
-//        node->value.var_value = variable;
-//    }
-//    else if (node_type == NUMBER)
-//    {
-//        node->value.val_value = value;
-//    }
-//    else
-//    {
-//        fprintf(stderr, "Incorrect node type %d\n", node_type);
-//    }
     return node;
 }

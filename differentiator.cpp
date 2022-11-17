@@ -9,40 +9,45 @@ Node *diff(const Node *node)
         case VARIABLE:
             return createNum(1);
         case OPERATION:
-            switch (node->value.op_value)
-            {
-                case ADD_OP:
-                    return ADD(dL, dR);
-                case SUB_OP:
-                    return SUB(dL, dR);
-                case MUL_OP:
-                    return ADD(MUL(dL, cR),
-                               MUL(cL, dR));
-                case DIV_OP:
-                    return DIV(SUB(MUL(dL, cR),
-                                   MUL(cL, dR)),
-                               MUL(cR, cR));
-                case POW_OP:
-                    return diffPop(node);
-                case LOG_OP:
-                    return diffLog(node);
-                case SIN_OP:
-                    return MUL(COS(createNum(0), cR), dR);
-                case COS_OP:
-                    return MUL(SUB(createNum(-1),
-                                   SIN(createNum(0), cR)), dR);
-                case INCORRECT_OP:
-                    fprintf(stderr, "Incorrect operation.");
-                    return nullptr;
-                default:
-                    fprintf(stderr, "Unknown operation.");
-                    return nullptr;
-            }
+            return diffOperation(node);
         case INCORRECT_TYPE:
             fprintf(stderr, "Incorrect node type.");
             return nullptr;
         default:
             fprintf(stderr, "Unknown node type.");
+            return nullptr;
+    }
+}
+
+Node *diffOperation(const Node *node)
+{
+    switch (node->value.op_value)
+    {
+        case ADD_OP:
+            return ADD(dL, dR);
+        case SUB_OP:
+            return SUB(dL, dR);
+        case MUL_OP:
+            return ADD(MUL(dL, cR),
+                       MUL(cL, dR));
+        case DIV_OP:
+            return DIV(SUB(MUL(dL, cR),
+                           MUL(cL, dR)),
+                       MUL(cR, cR));
+        case POW_OP:
+            return diffPop(node);
+        case LOG_OP:
+            return diffLog(node);
+        case SIN_OP:
+            return MUL(COS(createNum(0), cR), dR);
+        case COS_OP:
+            return MUL(SUB(createNum(-1),
+                           SIN(createNum(0), cR)), dR);
+        case INCORRECT_OP:
+            fprintf(stderr, "Incorrect operation.");
+            return nullptr;
+        default:
+            fprintf(stderr, "Unknown operation.");
             return nullptr;
     }
 }
@@ -97,12 +102,11 @@ Node *diffPop(const Node *node)
 
 Node *createNum(double value)
 {
-    Node *node = (Node *) calloc(1, sizeof(node[0]));
-    node->left = nullptr;
-    node->right = nullptr;
-    node->node_type = NUMBER;
-    node->value.val_value = value;
 
+    Node *node = createNode(NUMBER,
+                            {.val_value = value},
+                            nullptr,
+                            nullptr);
     return node;
 }
 

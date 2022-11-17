@@ -19,3 +19,8 @@ int main()
     treeCloseLogFile();
     return 0;
 }
+
+// TODO: generate matan diff
+// TODO: calculator
+// TODO: sin, cos, log
+// TODO: long variables

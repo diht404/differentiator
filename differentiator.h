@@ -49,6 +49,8 @@ const char LATEX_END_DOCUMENT[] = "\\end{document}";
 
 Node *diff(const Node *node);
 
+Node *diffOperation(const Node *node);
+
 Node *diffLog(const Node *node);
 
 Node *diffPop(const Node *node);
