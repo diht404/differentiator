@@ -58,16 +58,18 @@ struct Tree
 
 enum TreeErrors
 {
-    TREE_NO_ERRORS = 0,
-    TREE_IS_NULLPTR = 1,
-    NODE_IS_NULLPTR = 2,
-    TREE_FILENAME_IS_NULLPTR = 3,
-    CANT_OPEN_TREE_FILE = 4,
+    NO_ERRORS                 = 0,
+    TREE_NO_ERRORS            = 0,
+    TREE_IS_NULLPTR           = 1,
+    NODE_IS_NULLPTR           = 2,
+    TREE_FILENAME_IS_NULLPTR  = 3,
+    CANT_OPEN_TREE_FILE       = 4,
     TREE_CANT_ALLOCATE_MEMORY = 5,
-    TREE_NO_SUCH_ELEMENT = 6,
+    TREE_NO_SUCH_ELEMENT      = 6,
     TOO_MANY_ATTEMPTS_TO_READ = 7,
-    STRING_IS_NULLPTR = 8,
-    FILE_IS_NULLPTR = 9,
+    STRING_IS_NULLPTR         = 8,
+    FILE_IS_NULLPTR           = 9,
+    CANT_OPEN_FILE            = 10,
 };
 
 /**

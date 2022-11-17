@@ -2,6 +2,7 @@
 
 int main()
 {
+    set_latex_file("matan.tex");
     treeClearGraphLogFile();
     treeSetLogFile();
 
@@ -11,12 +12,13 @@ int main()
 
     treeDump(&tree);
 
+    printLatex(&tree);
 
     tree.root = diff(tree.root);
     treeDump(&tree);
 
-    printLatex(&tree);
     treeCloseLogFile();
+    close_latex_file();
     return 0;
 }
 

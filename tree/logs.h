@@ -17,6 +17,6 @@ size_t createGraphNodes(Node *node, FILE *fp);
 
 size_t createGraphEdges(Node *node, FILE *fp);
 
-void getValueOfNode(Node *node, char (*node_value)[BUFFER_SIZE]);
+void getValueOfNode(const Node *node, char (*node_value)[BUFFER_SIZE]);
 
 #endif //DIFFERENTIATOR_TREE_LOGS_H

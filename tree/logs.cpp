@@ -146,7 +146,7 @@ size_t createGraphEdges(Node *node, FILE *fp)
     return TREE_NO_ERRORS;
 }
 
-void getValueOfNode(Node *node, char (*node_value)[BUFFER_SIZE])
+void getValueOfNode(const Node *node, char (*node_value)[BUFFER_SIZE])
 {
     switch (node->node_type)
     {

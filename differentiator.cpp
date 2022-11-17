@@ -1,22 +1,70 @@
 #include "differentiator.h"
 
+char LATEX_FILENAME[BUFFER_SIZE] = "";
+FILE *LATEX_FILE = stderr;
+
+size_t set_latex_file(const char *filename)
+{
+    memcpy(LATEX_FILENAME, filename, 1024);
+    LATEX_FILE = fopen(filename, "w");
+    srand(time(NULL));
+    if (LATEX_FILE == nullptr)
+    {
+        LATEX_FILE = stderr;
+        return CANT_OPEN_FILE;
+    }
+    fprintf(LATEX_FILE, "%s\n", LATEX_START_DOCUMENT);
+    return NO_ERRORS;
+}
+
+size_t close_latex_file()
+{
+    fprintf(LATEX_FILE, "\n%s\n", LATEX_END_DOCUMENT);
+    fclose(LATEX_FILE);
+
+    char command[BUFFER_SIZE] = "";
+    sprintf(command,
+            "pdflatex -interaction batchmode %s",
+            LATEX_FILENAME);
+    system(command);
+    return NO_ERRORS;
+}
+
+size_t addRandomCringePhrase()
+{
+    size_t len = sizeof(CRINGE_PHRASES) / sizeof(CRINGE_PHRASES[0]);
+    fprintf(LATEX_FILE, "%s", CRINGE_PHRASES[rand() % len]);
+}
+
 Node *diff(const Node *node)
 {
+    Node *return_node = nullptr;
     switch (node->node_type)
     {
         case NUMBER:
-            return createNum(0);
+            return_node = createNum(0);
+            break; return return_node;
         case VARIABLE:
-            return createNum(1);
+            return_node = createNum(1);
+            break; return return_node;
         case OPERATION:
-            return diffOperation(node);
+            return_node = diffOperation(node);
+            break; return return_node;
         case INCORRECT_TYPE:
             fprintf(stderr, "Incorrect node type.");
-            return nullptr;
+            break; return nullptr;
         default:
             fprintf(stderr, "Unknown node type.");
-            return nullptr;
+            break; return nullptr;
     }
+    addRandomCringePhrase();
+
+    fprintf(LATEX_FILE, "\n$$");
+    printLatexNode(node, LATEX_FILE);
+    fprintf(LATEX_FILE, "' = ");
+    printLatexNode(return_node, LATEX_FILE);
+    fprintf(LATEX_FILE, "$$\n");
+    return return_node;
 }
 
 Node *diffOperation(const Node *node)
@@ -143,19 +191,12 @@ Node *copyNode(Node *node)
 
 void printLatex(Tree *tree)
 {
-    FILE *fp = fopen("matan.tex", "w");
-    fprintf(fp, "%s\n$$", LATEX_START_DOCUMENT);
-
-    printLatexNode(tree->root, fp);
-
-    fprintf(fp, "$$\n%s\n", LATEX_END_DOCUMENT);
-    fclose(fp);
-    system("rm matan.pdf");
-    system("pdflatex -interaction batchmode matan.tex");
-    system("rm matan.aux matan.log");
+    fprintf(LATEX_FILE, "$$");
+    printLatexNode(tree->root, LATEX_FILE);
+    fprintf(LATEX_FILE, "$$\n");
 }
 
-void printLatexNode(Node *node, FILE *fp)
+void printLatexNode(const Node *node, FILE *fp)
 {
     char node_value[BUFFER_SIZE] = "";
     getValueOfNode(node, &node_value);

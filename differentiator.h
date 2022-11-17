@@ -1,9 +1,9 @@
 #ifndef DIFFERENTIATOR__DIFFERENTIATOR_H
 #define DIFFERENTIATOR__DIFFERENTIATOR_H
-
 #include "stdio.h"
 #include "stdlib.h"
 #include "assert.h"
+#include "time.h"
 
 #include "tree/tree.h"
 #include "tree/logs.h"
@@ -23,6 +23,7 @@ const char LATEX_START_DOCUMENT[] =
     "\\usepackage{libertine}\n"
     "\\usepackage{amsfonts}\n"
     "\\usepackage{amsmath}\n"
+    "\\usepackage{hyperref}\n"
     "\n"
     "\\oddsidemargin=6mm\n"
     "\\textwidth=150mm\n"
@@ -47,6 +48,31 @@ const char LATEX_START_DOCUMENT[] =
 
 const char LATEX_END_DOCUMENT[] = "\\end{document}";
 
+const char CRINGE_PHRASES[][BUFFER_SIZE] =
+    {"Легко видеть, что\n",
+     "Очевидно, что\n",
+     "Используя Wolfram легко получить, что\n",
+     "В любом учебнике написано, что\n",
+     "Как рассказывали в начальной школе,\n",
+     "Оставим доказательство данного факта читателю в качестве упражнения.\n",
+     "В результате простых рассуждений можно получить\n",
+     "Нетрудно догадаться, что\n",
+     "Отсюда очевидно следует, что\n",
+     "Примем без доказаельства, что",
+     "Доказательство данного факта можно найти в "
+     "\\href{https://www.youtube.com/watch?v=dQw4w9WgXcQ}{видеолекции}\n",
+     "Доказательство будет дано "
+     "в следующем издании учебника.\n",
+     "Мне было лень доказывать этот факт.\n",
+     "Зачем Вы читаете эти комментарии, в них нет никакого смысла...\n",
+     "Тут могла быть Ваша реклама.\n",
+     "(((Какой-то комментарий)))\n"};
+
+
+size_t set_latex_file(const char *filename);
+
+size_t close_latex_file();
+
 Node *diff(const Node *node);
 
 Node *diffOperation(const Node *node);
@@ -66,7 +92,7 @@ Node *copyNode(Node *node);
 
 void printLatex(Tree *tree);
 
-void printLatexNode(Node *node, FILE *fp);
+void printLatexNode(const Node *node, FILE *fp);
 
 #define dL diff(node->left)
 #define dR diff(node->right)
