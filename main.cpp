@@ -19,13 +19,7 @@ int main()
     diff_tree.root = diff(tree.root, 'x');
     treeDump(&diff_tree);
 
-    bool changed = false;
-    convConst(diff_tree.root, &changed);
-    treeDump(&diff_tree);
-
-    changed = false;
-    deleteNeutralElements(diff_tree.root, &changed);
-    treeDump(&diff_tree);
+    simplifyTree(&diff_tree);
 
     double x = 1.2;
     char var_name = 'x';
@@ -39,6 +33,11 @@ int main()
     close_latex_file();
     return 0;
 }
-
+// TODO: print without ()
 // TODO: sin, cos, log
 // TODO: long variables
+// TODO: replace expressions
+// TODO: tangent params
+// TODO: more variables diff
+// TODO: taylor, error rate
+// TODO: curve graph

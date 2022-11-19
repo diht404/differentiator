@@ -89,6 +89,8 @@ Node *createNode(NodeType node_type,
 
 Node *copyNode(Node *node);
 
+void simplifyTree(Tree *tree);
+
 void convConst(Node *node, bool *changed);
 
 void deleteNeutralElements(Node *node, bool *changed);

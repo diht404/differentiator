@@ -194,6 +194,23 @@ Node *copyNode(Node *node)
     return new_node;
 }
 
+void simplifyTree(Tree *tree)
+{
+    bool changed = true;
+    while (changed)
+    {
+        changed = false;
+        convConst(tree->root, &changed);
+        if (changed)
+            treeDump(tree);
+
+        changed = false;
+        deleteNeutralElements(tree->root, &changed);
+        if (changed)
+            treeDump(tree);
+    }
+}
+
 void convConst(Node *node, bool *changed)
 {
     if (node->right)
@@ -452,9 +469,17 @@ double calculateNode(Node *node, const char variable, double value)
     if (node->node_type == NUMBER)
         return node->value.val_value;
 
-    if (node->node_type == VARIABLE &&
-        node->value.var_value == variable)
-        return value;
+    if (node->node_type == VARIABLE)
+    {
+        if (node->value.var_value == variable)
+            return value;
+        else
+        {
+            fprintf(stderr, "Unknown variable %c\n", variable);
+            return NAN;
+        }
+    }
+
 
     switch (node->value.op_value)
     {
