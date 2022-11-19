@@ -282,3 +282,47 @@ void printLatexOrdinaryNode(const Node *node,
         printLatexNode(node->right, fp);
     fprintf(fp, ")");
 }
+
+double calculateNode(Node *node, const char variable, double value)
+{
+    double leftValue = NAN;
+    double rightValue = NAN;
+
+    if (node->left)
+        leftValue = calculateNode(node->left, variable, value);
+    if (node->right)
+        rightValue = calculateNode(node->right, variable, value);
+
+    if (node->node_type == NUMBER)
+        return node->value.val_value;
+
+    if (node->node_type == VARIABLE &&
+        node->value.var_value == variable)
+        return value;
+
+    switch (node->value.op_value)
+    {
+        case ADD_OP:
+            return leftValue + rightValue;
+        case SUB_OP:
+            return leftValue - rightValue;
+        case MUL_OP:
+            return leftValue * rightValue;
+        case DIV_OP:
+            return leftValue / rightValue;
+        case POW_OP:
+            return pow(leftValue, rightValue);
+        case LOG_OP:
+            return log(rightValue)/log(leftValue);
+        case SIN_OP:
+            return sin(rightValue);
+        case COS_OP:
+            return cos(rightValue);
+        case INCORRECT_OP:
+            fprintf(stderr, "Incorrect operation.\n");
+            return NAN;
+        default:
+            fprintf(stderr, "Unknown operation.\n");
+            return NAN;
+    }
+}

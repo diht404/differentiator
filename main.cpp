@@ -16,6 +16,11 @@ int main()
 
     tree.root = diff(tree.root, 'x');
     treeDump(&tree);
+    double x = 1.2;
+    char var_name = 'x';
+    printf("f(%lg) = %lg\n",
+           x,
+           calculateNode(tree.root, var_name, x));
 
     treeCloseLogFile();
     close_latex_file();

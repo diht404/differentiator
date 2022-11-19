@@ -108,6 +108,8 @@ void printLatexOrdinaryNode(const Node *node,
                             char node_value[BUFFER_SIZE],
                             FILE *fp);
 
+double calculateNode(Node *node, const char variable, double value);
+
 #define dL diff(node->left, variable)
 #define dR diff(node->right, variable)
 #define cL copyNode(node->left)
