@@ -287,18 +287,30 @@ void deleteNeutralElements(Node *node, bool *changed)
                               IS_OP(DIV_OP)))
     {
         Node *left_node = node->left;
-        Node *right_node = node->right;
-        *node = *cL;
+        nodeDtor(node->right);
+        node->left = nullptr;
+        node->right = nullptr;
+        node->node_type = left_node->node_type;
+        node->value = left_node->value;
+        if (left_node->left)
+            node->left = copyNode(left_node->left);
+        if (left_node->right)
+            node->right = copyNode(left_node->right);
         nodeDtor(left_node);
-        nodeDtor(right_node);
         *changed = true;
     }
     else if (IS_ZERO_LEFT && IS_OP(ADD_OP))
     {
-        Node *left_node = node->left;
         Node *right_node = node->right;
-        *node = *cR;
-        nodeDtor(left_node);
+        nodeDtor(node->left);
+        node->left = nullptr;
+        node->right = nullptr;
+        node->node_type = right_node->node_type;
+        node->value = right_node->value;
+        if (right_node->left)
+            node->left = copyNode(right_node->left);
+        if (right_node->right)
+            node->right = copyNode(right_node->right);
         nodeDtor(right_node);
         *changed = true;
     }
