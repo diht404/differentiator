@@ -1,585 +1,585 @@
 digraph TREE {
     rankdir=TB;
-    node_0x5622c709ddc0[shape="record", 
+    node_0x4b8b680[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {+ |
-            {{LEFT | 0x5622c709dd90} | {INDEX | 0x5622c709ddc0} | {RIGHT | 0x5622c709d400}}}"]
-    node_0x5622c709dd90[shape="record", 
+            {{LEFT | 0x4b8b620} | {INDEX | 0x4b8b680} | {RIGHT | 0x4b8a300}}}"]
+    node_0x4b8b620[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709dd60} | {INDEX | 0x5622c709dd90} | {RIGHT | 0x5622c709d430}}}"]
-    node_0x5622c709dd60[shape="record", 
+            {{LEFT | 0x4b8b5c0} | {INDEX | 0x4b8b620} | {RIGHT | 0x4b8a360}}}"]
+    node_0x4b8b5c0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {+ |
-            {{LEFT | 0x5622c709dd30} | {INDEX | 0x5622c709dd60} | {RIGHT | 0x5622c709d8e0}}}"]
-    node_0x5622c709dd30[shape="record", 
+            {{LEFT | 0x4b8b560} | {INDEX | 0x4b8b5c0} | {RIGHT | 0x4b8acc0}}}"]
+    node_0x4b8b560[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709dd00} | {INDEX | 0x5622c709dd30} | {RIGHT | 0x5622c709d910}}}"]
-    node_0x5622c709dd00[shape="record", 
+            {{LEFT | 0x4b8b500} | {INDEX | 0x4b8b560} | {RIGHT | 0x4b8ad20}}}"]
+    node_0x4b8b500[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709dcd0} | {INDEX | 0x5622c709dd00} | {RIGHT | 0x5622c709db80}}}"]
-    node_0x5622c709dcd0[shape="record", 
+            {{LEFT | 0x4b8b4a0} | {INDEX | 0x4b8b500} | {RIGHT | 0x4b8b200}}}"]
+    node_0x4b8b4a0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {- |
-            {{LEFT | 0x5622c709dca0} | {INDEX | 0x5622c709dcd0} | {RIGHT | 0x5622c709dc70}}}"]
-    node_0x5622c709dca0[shape="record", 
+            {{LEFT | 0x4b8b440} | {INDEX | 0x4b8b4a0} | {RIGHT | 0x4b8b3e0}}}"]
+    node_0x4b8b440[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {-1 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709dca0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709dc70[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8b440} | {RIGHT | (nil)}}}"]
+    node_0x4b8b3e0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {sin |
-            {{LEFT | 0x5622c709dc40} | {INDEX | 0x5622c709dc70} | {RIGHT | 0x5622c709dbb0}}}"]
-    node_0x5622c709dc40[shape="record", 
+            {{LEFT | 0x4b8b380} | {INDEX | 0x4b8b3e0} | {RIGHT | 0x4b8b260}}}"]
+    node_0x4b8b380[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {0 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709dc40} | {RIGHT | (nil)}}}"]
-    node_0x5622c709dbb0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8b380} | {RIGHT | (nil)}}}"]
+    node_0x4b8b260[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {^ |
-            {{LEFT | 0x5622c709dbe0} | {INDEX | 0x5622c709dbb0} | {RIGHT | 0x5622c709dc10}}}"]
-    node_0x5622c709dbe0[shape="record", 
+            {{LEFT | 0x4b8b2c0} | {INDEX | 0x4b8b260} | {RIGHT | 0x4b8b320}}}"]
+    node_0x4b8b2c0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709dbe0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709dc10[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8b2c0} | {RIGHT | (nil)}}}"]
+    node_0x4b8b320[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709dc10} | {RIGHT | (nil)}}}"]
-    node_0x5622c709db80[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8b320} | {RIGHT | (nil)}}}"]
+    node_0x4b8b200[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709db50} | {INDEX | 0x5622c709db80} | {RIGHT | 0x5622c709dac0}}}"]
-    node_0x5622c709db50[shape="record", 
+            {{LEFT | 0x4b8b1a0} | {INDEX | 0x4b8b200} | {RIGHT | 0x4b8b080}}}"]
+    node_0x4b8b1a0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709db20} | {INDEX | 0x5622c709db50} | {RIGHT | 0x5622c709daf0}}}"]
-    node_0x5622c709db20[shape="record", 
+            {{LEFT | 0x4b8b140} | {INDEX | 0x4b8b1a0} | {RIGHT | 0x4b8b0e0}}}"]
+    node_0x4b8b140[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709db20} | {RIGHT | (nil)}}}"]
-    node_0x5622c709daf0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8b140} | {RIGHT | (nil)}}}"]
+    node_0x4b8b0e0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {1 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709daf0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709dac0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8b0e0} | {RIGHT | (nil)}}}"]
+    node_0x4b8b080[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {^ |
-            {{LEFT | 0x5622c709da90} | {INDEX | 0x5622c709dac0} | {RIGHT | 0x5622c709da60}}}"]
-    node_0x5622c709da90[shape="record", 
+            {{LEFT | 0x4b8b020} | {INDEX | 0x4b8b080} | {RIGHT | 0x4b8afc0}}}"]
+    node_0x4b8b020[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709da90} | {RIGHT | (nil)}}}"]
-    node_0x5622c709da60[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8b020} | {RIGHT | (nil)}}}"]
+    node_0x4b8afc0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {- |
-            {{LEFT | 0x5622c709da30} | {INDEX | 0x5622c709da60} | {RIGHT | 0x5622c709da00}}}"]
-    node_0x5622c709da30[shape="record", 
+            {{LEFT | 0x4b8af60} | {INDEX | 0x4b8afc0} | {RIGHT | 0x4b8af00}}}"]
+    node_0x4b8af60[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709da30} | {RIGHT | (nil)}}}"]
-    node_0x5622c709da00[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8af60} | {RIGHT | (nil)}}}"]
+    node_0x4b8af00[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {1 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709da00} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d910[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8af00} | {RIGHT | (nil)}}}"]
+    node_0x4b8ad20[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {sin |
-            {{LEFT | 0x5622c709d940} | {INDEX | 0x5622c709d910} | {RIGHT | 0x5622c709d970}}}"]
-    node_0x5622c709d940[shape="record", 
+            {{LEFT | 0x4b8ad80} | {INDEX | 0x4b8ad20} | {RIGHT | 0x4b8ade0}}}"]
+    node_0x4b8ad80[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {0 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d940} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d970[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8ad80} | {RIGHT | (nil)}}}"]
+    node_0x4b8ade0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {^ |
-            {{LEFT | 0x5622c709d9a0} | {INDEX | 0x5622c709d970} | {RIGHT | 0x5622c709d9d0}}}"]
-    node_0x5622c709d9a0[shape="record", 
+            {{LEFT | 0x4b8ae40} | {INDEX | 0x4b8ade0} | {RIGHT | 0x4b8aea0}}}"]
+    node_0x4b8ae40[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d9a0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d9d0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8ae40} | {RIGHT | (nil)}}}"]
+    node_0x4b8aea0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d9d0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d8e0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8aea0} | {RIGHT | (nil)}}}"]
+    node_0x4b8acc0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709d7f0} | {INDEX | 0x5622c709d8e0} | {RIGHT | 0x5622c709d7c0}}}"]
-    node_0x5622c709d7f0[shape="record", 
+            {{LEFT | 0x4b8aae0} | {INDEX | 0x4b8acc0} | {RIGHT | 0x4b8aa80}}}"]
+    node_0x4b8aae0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {cos |
-            {{LEFT | 0x5622c709d820} | {INDEX | 0x5622c709d7f0} | {RIGHT | 0x5622c709d850}}}"]
-    node_0x5622c709d820[shape="record", 
+            {{LEFT | 0x4b8ab40} | {INDEX | 0x4b8aae0} | {RIGHT | 0x4b8aba0}}}"]
+    node_0x4b8ab40[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {0 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d820} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d850[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8ab40} | {RIGHT | (nil)}}}"]
+    node_0x4b8aba0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {^ |
-            {{LEFT | 0x5622c709d880} | {INDEX | 0x5622c709d850} | {RIGHT | 0x5622c709d8b0}}}"]
-    node_0x5622c709d880[shape="record", 
+            {{LEFT | 0x4b8ac00} | {INDEX | 0x4b8aba0} | {RIGHT | 0x4b8ac60}}}"]
+    node_0x4b8ac00[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d880} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d8b0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8ac00} | {RIGHT | (nil)}}}"]
+    node_0x4b8ac60[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d8b0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d7c0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8ac60} | {RIGHT | (nil)}}}"]
+    node_0x4b8aa80[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709d790} | {INDEX | 0x5622c709d7c0} | {RIGHT | 0x5622c709d6a0}}}"]
-    node_0x5622c709d790[shape="record", 
+            {{LEFT | 0x4b8aa20} | {INDEX | 0x4b8aa80} | {RIGHT | 0x4b8a840}}}"]
+    node_0x4b8aa20[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {cos |
-            {{LEFT | 0x5622c709d760} | {INDEX | 0x5622c709d790} | {RIGHT | 0x5622c709d6d0}}}"]
-    node_0x5622c709d760[shape="record", 
+            {{LEFT | 0x4b8a9c0} | {INDEX | 0x4b8aa20} | {RIGHT | 0x4b8a8a0}}}"]
+    node_0x4b8a9c0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {0 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d760} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d6d0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a9c0} | {RIGHT | (nil)}}}"]
+    node_0x4b8a8a0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {^ |
-            {{LEFT | 0x5622c709d700} | {INDEX | 0x5622c709d6d0} | {RIGHT | 0x5622c709d730}}}"]
-    node_0x5622c709d700[shape="record", 
+            {{LEFT | 0x4b8a900} | {INDEX | 0x4b8a8a0} | {RIGHT | 0x4b8a960}}}"]
+    node_0x4b8a900[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d700} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d730[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a900} | {RIGHT | (nil)}}}"]
+    node_0x4b8a960[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d730} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d6a0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a960} | {RIGHT | (nil)}}}"]
+    node_0x4b8a840[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709d670} | {INDEX | 0x5622c709d6a0} | {RIGHT | 0x5622c709d5e0}}}"]
-    node_0x5622c709d670[shape="record", 
+            {{LEFT | 0x4b8a7e0} | {INDEX | 0x4b8a840} | {RIGHT | 0x4b8a6c0}}}"]
+    node_0x4b8a7e0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709d640} | {INDEX | 0x5622c709d670} | {RIGHT | 0x5622c709d610}}}"]
-    node_0x5622c709d640[shape="record", 
+            {{LEFT | 0x4b8a780} | {INDEX | 0x4b8a7e0} | {RIGHT | 0x4b8a720}}}"]
+    node_0x4b8a780[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d640} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d610[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a780} | {RIGHT | (nil)}}}"]
+    node_0x4b8a720[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {1 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d610} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d5e0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a720} | {RIGHT | (nil)}}}"]
+    node_0x4b8a6c0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {^ |
-            {{LEFT | 0x5622c709d5b0} | {INDEX | 0x5622c709d5e0} | {RIGHT | 0x5622c709d580}}}"]
-    node_0x5622c709d5b0[shape="record", 
+            {{LEFT | 0x4b8a660} | {INDEX | 0x4b8a6c0} | {RIGHT | 0x4b8a600}}}"]
+    node_0x4b8a660[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d5b0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d580[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a660} | {RIGHT | (nil)}}}"]
+    node_0x4b8a600[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {- |
-            {{LEFT | 0x5622c709d550} | {INDEX | 0x5622c709d580} | {RIGHT | 0x5622c709d520}}}"]
-    node_0x5622c709d550[shape="record", 
+            {{LEFT | 0x4b8a5a0} | {INDEX | 0x4b8a600} | {RIGHT | 0x4b8a540}}}"]
+    node_0x4b8a5a0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d550} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d520[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a5a0} | {RIGHT | (nil)}}}"]
+    node_0x4b8a540[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {1 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d520} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d430[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a540} | {RIGHT | (nil)}}}"]
+    node_0x4b8a360[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {log |
-            {{LEFT | 0x5622c709d460} | {INDEX | 0x5622c709d430} | {RIGHT | 0x5622c709d490}}}"]
-    node_0x5622c709d460[shape="record", 
+            {{LEFT | 0x4b8a3c0} | {INDEX | 0x4b8a360} | {RIGHT | 0x4b8a420}}}"]
+    node_0x4b8a3c0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d460} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d490[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a3c0} | {RIGHT | (nil)}}}"]
+    node_0x4b8a420[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709d4c0} | {INDEX | 0x5622c709d490} | {RIGHT | 0x5622c709d4f0}}}"]
-    node_0x5622c709d4c0[shape="record", 
+            {{LEFT | 0x4b8a480} | {INDEX | 0x4b8a420} | {RIGHT | 0x4b8a4e0}}}"]
+    node_0x4b8a480[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {3.5 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d4c0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d4f0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a480} | {RIGHT | (nil)}}}"]
+    node_0x4b8a4e0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d4f0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d400[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a4e0} | {RIGHT | (nil)}}}"]
+    node_0x4b8a300[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709d1f0} | {INDEX | 0x5622c709d400} | {RIGHT | 0x5622c709d1c0}}}"]
-    node_0x5622c709d1f0[shape="record", 
+            {{LEFT | 0x4b89ee0} | {INDEX | 0x4b8a300} | {RIGHT | 0x4b89e80}}}"]
+    node_0x4b89ee0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709d220} | {INDEX | 0x5622c709d1f0} | {RIGHT | 0x5622c709d310}}}"]
-    node_0x5622c709d220[shape="record", 
+            {{LEFT | 0x4b89f40} | {INDEX | 0x4b89ee0} | {RIGHT | 0x4b8a120}}}"]
+    node_0x4b89f40[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {cos |
-            {{LEFT | 0x5622c709d250} | {INDEX | 0x5622c709d220} | {RIGHT | 0x5622c709d280}}}"]
-    node_0x5622c709d250[shape="record", 
+            {{LEFT | 0x4b89fa0} | {INDEX | 0x4b89f40} | {RIGHT | 0x4b8a000}}}"]
+    node_0x4b89fa0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {0 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d250} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d280[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89fa0} | {RIGHT | (nil)}}}"]
+    node_0x4b8a000[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {^ |
-            {{LEFT | 0x5622c709d2b0} | {INDEX | 0x5622c709d280} | {RIGHT | 0x5622c709d2e0}}}"]
-    node_0x5622c709d2b0[shape="record", 
+            {{LEFT | 0x4b8a060} | {INDEX | 0x4b8a000} | {RIGHT | 0x4b8a0c0}}}"]
+    node_0x4b8a060[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d2b0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d2e0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a060} | {RIGHT | (nil)}}}"]
+    node_0x4b8a0c0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d2e0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d310[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a0c0} | {RIGHT | (nil)}}}"]
+    node_0x4b8a120[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {sin |
-            {{LEFT | 0x5622c709d340} | {INDEX | 0x5622c709d310} | {RIGHT | 0x5622c709d370}}}"]
-    node_0x5622c709d340[shape="record", 
+            {{LEFT | 0x4b8a180} | {INDEX | 0x4b8a120} | {RIGHT | 0x4b8a1e0}}}"]
+    node_0x4b8a180[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {0 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d340} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d370[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a180} | {RIGHT | (nil)}}}"]
+    node_0x4b8a1e0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {^ |
-            {{LEFT | 0x5622c709d3a0} | {INDEX | 0x5622c709d370} | {RIGHT | 0x5622c709d3d0}}}"]
-    node_0x5622c709d3a0[shape="record", 
+            {{LEFT | 0x4b8a240} | {INDEX | 0x4b8a1e0} | {RIGHT | 0x4b8a2a0}}}"]
+    node_0x4b8a240[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d3a0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d3d0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a240} | {RIGHT | (nil)}}}"]
+    node_0x4b8a2a0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d3d0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d1c0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b8a2a0} | {RIGHT | (nil)}}}"]
+    node_0x4b89e80[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {/ |
-            {{LEFT | 0x5622c709d190} | {INDEX | 0x5622c709d1c0} | {RIGHT | 0x5622c709cce0}}}"]
-    node_0x5622c709d190[shape="record", 
+            {{LEFT | 0x4b89e20} | {INDEX | 0x4b89e80} | {RIGHT | 0x4b894c0}}}"]
+    node_0x4b89e20[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {- |
-            {{LEFT | 0x5622c709d160} | {INDEX | 0x5622c709d190} | {RIGHT | 0x5622c709ce90}}}"]
-    node_0x5622c709d160[shape="record", 
+            {{LEFT | 0x4b89dc0} | {INDEX | 0x4b89e20} | {RIGHT | 0x4b89820}}}"]
+    node_0x4b89dc0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {/ |
-            {{LEFT | 0x5622c709d130} | {INDEX | 0x5622c709d160} | {RIGHT | 0x5622c709cec0}}}"]
-    node_0x5622c709d130[shape="record", 
+            {{LEFT | 0x4b89d60} | {INDEX | 0x4b89dc0} | {RIGHT | 0x4b89880}}}"]
+    node_0x4b89d60[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709d100} | {INDEX | 0x5622c709d130} | {RIGHT | 0x5622c709d070}}}"]
-    node_0x5622c709d100[shape="record", 
+            {{LEFT | 0x4b89d00} | {INDEX | 0x4b89d60} | {RIGHT | 0x4b89be0}}}"]
+    node_0x4b89d00[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {log |
-            {{LEFT | 0x5622c709d0d0} | {INDEX | 0x5622c709d100} | {RIGHT | 0x5622c709d0a0}}}"]
-    node_0x5622c709d0d0[shape="record", 
+            {{LEFT | 0x4b89ca0} | {INDEX | 0x4b89d00} | {RIGHT | 0x4b89c40}}}"]
+    node_0x4b89ca0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2.71828 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d0d0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d0a0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89ca0} | {RIGHT | (nil)}}}"]
+    node_0x4b89c40[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d0a0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709d070[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89c40} | {RIGHT | (nil)}}}"]
+    node_0x4b89be0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {+ |
-            {{LEFT | 0x5622c709d040} | {INDEX | 0x5622c709d070} | {RIGHT | 0x5622c709cfb0}}}"]
-    node_0x5622c709d040[shape="record", 
+            {{LEFT | 0x4b89b80} | {INDEX | 0x4b89be0} | {RIGHT | 0x4b89a60}}}"]
+    node_0x4b89b80[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709d010} | {INDEX | 0x5622c709d040} | {RIGHT | 0x5622c709cfe0}}}"]
-    node_0x5622c709d010[shape="record", 
+            {{LEFT | 0x4b89b20} | {INDEX | 0x4b89b80} | {RIGHT | 0x4b89ac0}}}"]
+    node_0x4b89b20[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {0 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709d010} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cfe0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89b20} | {RIGHT | (nil)}}}"]
+    node_0x4b89ac0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cfe0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cfb0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89ac0} | {RIGHT | (nil)}}}"]
+    node_0x4b89a60[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709cf80} | {INDEX | 0x5622c709cfb0} | {RIGHT | 0x5622c709cf50}}}"]
-    node_0x5622c709cf80[shape="record", 
+            {{LEFT | 0x4b89a00} | {INDEX | 0x4b89a60} | {RIGHT | 0x4b899a0}}}"]
+    node_0x4b89a00[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {3.5 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cf80} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cf50[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89a00} | {RIGHT | (nil)}}}"]
+    node_0x4b899a0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {1 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cf50} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cec0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b899a0} | {RIGHT | (nil)}}}"]
+    node_0x4b89880[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709cef0} | {INDEX | 0x5622c709cec0} | {RIGHT | 0x5622c709cf20}}}"]
-    node_0x5622c709cef0[shape="record", 
+            {{LEFT | 0x4b898e0} | {INDEX | 0x4b89880} | {RIGHT | 0x4b89940}}}"]
+    node_0x4b898e0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {3.5 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cef0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cf20[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b898e0} | {RIGHT | (nil)}}}"]
+    node_0x4b89940[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cf20} | {RIGHT | (nil)}}}"]
-    node_0x5622c709ce90[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89940} | {RIGHT | (nil)}}}"]
+    node_0x4b89820[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {/ |
-            {{LEFT | 0x5622c709ce60} | {INDEX | 0x5622c709ce90} | {RIGHT | 0x5622c709cd10}}}"]
-    node_0x5622c709ce60[shape="record", 
+            {{LEFT | 0x4b897c0} | {INDEX | 0x4b89820} | {RIGHT | 0x4b89520}}}"]
+    node_0x4b897c0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709ce30} | {INDEX | 0x5622c709ce60} | {RIGHT | 0x5622c709cd40}}}"]
-    node_0x5622c709ce30[shape="record", 
+            {{LEFT | 0x4b89760} | {INDEX | 0x4b897c0} | {RIGHT | 0x4b89580}}}"]
+    node_0x4b89760[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {log |
-            {{LEFT | 0x5622c709ce00} | {INDEX | 0x5622c709ce30} | {RIGHT | 0x5622c709cd70}}}"]
-    node_0x5622c709ce00[shape="record", 
+            {{LEFT | 0x4b89700} | {INDEX | 0x4b89760} | {RIGHT | 0x4b895e0}}}"]
+    node_0x4b89700[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2.71828 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709ce00} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cd70[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89700} | {RIGHT | (nil)}}}"]
+    node_0x4b895e0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709cda0} | {INDEX | 0x5622c709cd70} | {RIGHT | 0x5622c709cdd0}}}"]
-    node_0x5622c709cda0[shape="record", 
+            {{LEFT | 0x4b89640} | {INDEX | 0x4b895e0} | {RIGHT | 0x4b896a0}}}"]
+    node_0x4b89640[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {3.5 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cda0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cdd0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89640} | {RIGHT | (nil)}}}"]
+    node_0x4b896a0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cdd0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cd40[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b896a0} | {RIGHT | (nil)}}}"]
+    node_0x4b89580[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {1 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cd40} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cd10[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89580} | {RIGHT | (nil)}}}"]
+    node_0x4b89520[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cd10} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cce0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89520} | {RIGHT | (nil)}}}"]
+    node_0x4b894c0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {* |
-            {{LEFT | 0x5622c709ccb0} | {INDEX | 0x5622c709cce0} | {RIGHT | 0x5622c709cc20}}}"]
-    node_0x5622c709ccb0[shape="record", 
+            {{LEFT | 0x4b89460} | {INDEX | 0x4b894c0} | {RIGHT | 0x4b89340}}}"]
+    node_0x4b89460[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {log |
-            {{LEFT | 0x5622c709cc80} | {INDEX | 0x5622c709ccb0} | {RIGHT | 0x5622c709cc50}}}"]
-    node_0x5622c709cc80[shape="record", 
+            {{LEFT | 0x4b89400} | {INDEX | 0x4b89460} | {RIGHT | 0x4b893a0}}}"]
+    node_0x4b89400[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2.71828 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cc80} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cc50[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b89400} | {RIGHT | (nil)}}}"]
+    node_0x4b893a0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cc50} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cc20[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b893a0} | {RIGHT | (nil)}}}"]
+    node_0x4b89340[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {log |
-            {{LEFT | 0x5622c709cbf0} | {INDEX | 0x5622c709cc20} | {RIGHT | 0x5622c709cbc0}}}"]
-    node_0x5622c709cbf0[shape="record", 
+            {{LEFT | 0x4b892e0} | {INDEX | 0x4b89340} | {RIGHT | 0x4b89280}}}"]
+    node_0x4b892e0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {2.71828 |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cbf0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709cbc0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x4b892e0} | {RIGHT | (nil)}}}"]
+    node_0x4b89280[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {x |
-            {{LEFT | (nil)} | {INDEX | 0x5622c709cbc0} | {RIGHT | (nil)}}}"]
-    node_0x5622c709ddc0->node_0x5622c709dd90[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709dd90->node_0x5622c709dd60[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709dd60->node_0x5622c709dd30[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709dd30->node_0x5622c709dd00[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709dd00->node_0x5622c709dcd0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709dcd0->node_0x5622c709dca0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709dcd0->node_0x5622c709dc70[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709dc70->node_0x5622c709dc40[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709dc70->node_0x5622c709dbb0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709dbb0->node_0x5622c709dbe0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709dbb0->node_0x5622c709dc10[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709dd00->node_0x5622c709db80[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709db80->node_0x5622c709db50[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709db50->node_0x5622c709db20[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709db50->node_0x5622c709daf0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709db80->node_0x5622c709dac0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709dac0->node_0x5622c709da90[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709dac0->node_0x5622c709da60[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709da60->node_0x5622c709da30[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709da60->node_0x5622c709da00[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709dd30->node_0x5622c709d910[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d910->node_0x5622c709d940[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d910->node_0x5622c709d970[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d970->node_0x5622c709d9a0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d970->node_0x5622c709d9d0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709dd60->node_0x5622c709d8e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d8e0->node_0x5622c709d7f0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d7f0->node_0x5622c709d820[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d7f0->node_0x5622c709d850[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d850->node_0x5622c709d880[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d850->node_0x5622c709d8b0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d8e0->node_0x5622c709d7c0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d7c0->node_0x5622c709d790[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d790->node_0x5622c709d760[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d790->node_0x5622c709d6d0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d6d0->node_0x5622c709d700[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d6d0->node_0x5622c709d730[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d7c0->node_0x5622c709d6a0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d6a0->node_0x5622c709d670[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d670->node_0x5622c709d640[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d670->node_0x5622c709d610[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d6a0->node_0x5622c709d5e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d5e0->node_0x5622c709d5b0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d5e0->node_0x5622c709d580[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d580->node_0x5622c709d550[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d580->node_0x5622c709d520[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709dd90->node_0x5622c709d430[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d430->node_0x5622c709d460[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d430->node_0x5622c709d490[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d490->node_0x5622c709d4c0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d490->node_0x5622c709d4f0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709ddc0->node_0x5622c709d400[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d400->node_0x5622c709d1f0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d1f0->node_0x5622c709d220[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d220->node_0x5622c709d250[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d220->node_0x5622c709d280[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d280->node_0x5622c709d2b0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d280->node_0x5622c709d2e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d1f0->node_0x5622c709d310[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d310->node_0x5622c709d340[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d310->node_0x5622c709d370[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d370->node_0x5622c709d3a0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d370->node_0x5622c709d3d0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d400->node_0x5622c709d1c0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d1c0->node_0x5622c709d190[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d190->node_0x5622c709d160[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d160->node_0x5622c709d130[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d130->node_0x5622c709d100[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d100->node_0x5622c709d0d0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d100->node_0x5622c709d0a0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d130->node_0x5622c709d070[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d070->node_0x5622c709d040[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d040->node_0x5622c709d010[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709d040->node_0x5622c709cfe0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d070->node_0x5622c709cfb0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709cfb0->node_0x5622c709cf80[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709cfb0->node_0x5622c709cf50[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d160->node_0x5622c709cec0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709cec0->node_0x5622c709cef0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709cec0->node_0x5622c709cf20[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d190->node_0x5622c709ce90[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709ce90->node_0x5622c709ce60[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709ce60->node_0x5622c709ce30[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709ce30->node_0x5622c709ce00[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709ce30->node_0x5622c709cd70[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709cd70->node_0x5622c709cda0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709cd70->node_0x5622c709cdd0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709ce60->node_0x5622c709cd40[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709ce90->node_0x5622c709cd10[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709d1c0->node_0x5622c709cce0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709cce0->node_0x5622c709ccb0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709ccb0->node_0x5622c709cc80[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709ccb0->node_0x5622c709cc50[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709cce0->node_0x5622c709cc20[color="#a66be8", fontcolor="#e87b6b"];    node_0x5622c709cc20->node_0x5622c709cbf0[color="#a66be8", fontcolor="#6be871"];    node_0x5622c709cc20->node_0x5622c709cbc0[color="#a66be8", fontcolor="#e87b6b"];}
+            {{LEFT | (nil)} | {INDEX | 0x4b89280} | {RIGHT | (nil)}}}"]
+    node_0x4b8b680->node_0x4b8b620[color="#a66be8", fontcolor="#6be871"];    node_0x4b8b620->node_0x4b8b5c0[color="#a66be8", fontcolor="#6be871"];    node_0x4b8b5c0->node_0x4b8b560[color="#a66be8", fontcolor="#6be871"];    node_0x4b8b560->node_0x4b8b500[color="#a66be8", fontcolor="#6be871"];    node_0x4b8b500->node_0x4b8b4a0[color="#a66be8", fontcolor="#6be871"];    node_0x4b8b4a0->node_0x4b8b440[color="#a66be8", fontcolor="#6be871"];    node_0x4b8b4a0->node_0x4b8b3e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8b3e0->node_0x4b8b380[color="#a66be8", fontcolor="#6be871"];    node_0x4b8b3e0->node_0x4b8b260[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8b260->node_0x4b8b2c0[color="#a66be8", fontcolor="#6be871"];    node_0x4b8b260->node_0x4b8b320[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8b500->node_0x4b8b200[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8b200->node_0x4b8b1a0[color="#a66be8", fontcolor="#6be871"];    node_0x4b8b1a0->node_0x4b8b140[color="#a66be8", fontcolor="#6be871"];    node_0x4b8b1a0->node_0x4b8b0e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8b200->node_0x4b8b080[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8b080->node_0x4b8b020[color="#a66be8", fontcolor="#6be871"];    node_0x4b8b080->node_0x4b8afc0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8afc0->node_0x4b8af60[color="#a66be8", fontcolor="#6be871"];    node_0x4b8afc0->node_0x4b8af00[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8b560->node_0x4b8ad20[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8ad20->node_0x4b8ad80[color="#a66be8", fontcolor="#6be871"];    node_0x4b8ad20->node_0x4b8ade0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8ade0->node_0x4b8ae40[color="#a66be8", fontcolor="#6be871"];    node_0x4b8ade0->node_0x4b8aea0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8b5c0->node_0x4b8acc0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8acc0->node_0x4b8aae0[color="#a66be8", fontcolor="#6be871"];    node_0x4b8aae0->node_0x4b8ab40[color="#a66be8", fontcolor="#6be871"];    node_0x4b8aae0->node_0x4b8aba0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8aba0->node_0x4b8ac00[color="#a66be8", fontcolor="#6be871"];    node_0x4b8aba0->node_0x4b8ac60[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8acc0->node_0x4b8aa80[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8aa80->node_0x4b8aa20[color="#a66be8", fontcolor="#6be871"];    node_0x4b8aa20->node_0x4b8a9c0[color="#a66be8", fontcolor="#6be871"];    node_0x4b8aa20->node_0x4b8a8a0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a8a0->node_0x4b8a900[color="#a66be8", fontcolor="#6be871"];    node_0x4b8a8a0->node_0x4b8a960[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8aa80->node_0x4b8a840[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a840->node_0x4b8a7e0[color="#a66be8", fontcolor="#6be871"];    node_0x4b8a7e0->node_0x4b8a780[color="#a66be8", fontcolor="#6be871"];    node_0x4b8a7e0->node_0x4b8a720[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a840->node_0x4b8a6c0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a6c0->node_0x4b8a660[color="#a66be8", fontcolor="#6be871"];    node_0x4b8a6c0->node_0x4b8a600[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a600->node_0x4b8a5a0[color="#a66be8", fontcolor="#6be871"];    node_0x4b8a600->node_0x4b8a540[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8b620->node_0x4b8a360[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a360->node_0x4b8a3c0[color="#a66be8", fontcolor="#6be871"];    node_0x4b8a360->node_0x4b8a420[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a420->node_0x4b8a480[color="#a66be8", fontcolor="#6be871"];    node_0x4b8a420->node_0x4b8a4e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8b680->node_0x4b8a300[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a300->node_0x4b89ee0[color="#a66be8", fontcolor="#6be871"];    node_0x4b89ee0->node_0x4b89f40[color="#a66be8", fontcolor="#6be871"];    node_0x4b89f40->node_0x4b89fa0[color="#a66be8", fontcolor="#6be871"];    node_0x4b89f40->node_0x4b8a000[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a000->node_0x4b8a060[color="#a66be8", fontcolor="#6be871"];    node_0x4b8a000->node_0x4b8a0c0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89ee0->node_0x4b8a120[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a120->node_0x4b8a180[color="#a66be8", fontcolor="#6be871"];    node_0x4b8a120->node_0x4b8a1e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a1e0->node_0x4b8a240[color="#a66be8", fontcolor="#6be871"];    node_0x4b8a1e0->node_0x4b8a2a0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b8a300->node_0x4b89e80[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89e80->node_0x4b89e20[color="#a66be8", fontcolor="#6be871"];    node_0x4b89e20->node_0x4b89dc0[color="#a66be8", fontcolor="#6be871"];    node_0x4b89dc0->node_0x4b89d60[color="#a66be8", fontcolor="#6be871"];    node_0x4b89d60->node_0x4b89d00[color="#a66be8", fontcolor="#6be871"];    node_0x4b89d00->node_0x4b89ca0[color="#a66be8", fontcolor="#6be871"];    node_0x4b89d00->node_0x4b89c40[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89d60->node_0x4b89be0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89be0->node_0x4b89b80[color="#a66be8", fontcolor="#6be871"];    node_0x4b89b80->node_0x4b89b20[color="#a66be8", fontcolor="#6be871"];    node_0x4b89b80->node_0x4b89ac0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89be0->node_0x4b89a60[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89a60->node_0x4b89a00[color="#a66be8", fontcolor="#6be871"];    node_0x4b89a60->node_0x4b899a0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89dc0->node_0x4b89880[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89880->node_0x4b898e0[color="#a66be8", fontcolor="#6be871"];    node_0x4b89880->node_0x4b89940[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89e20->node_0x4b89820[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89820->node_0x4b897c0[color="#a66be8", fontcolor="#6be871"];    node_0x4b897c0->node_0x4b89760[color="#a66be8", fontcolor="#6be871"];    node_0x4b89760->node_0x4b89700[color="#a66be8", fontcolor="#6be871"];    node_0x4b89760->node_0x4b895e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b895e0->node_0x4b89640[color="#a66be8", fontcolor="#6be871"];    node_0x4b895e0->node_0x4b896a0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b897c0->node_0x4b89580[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89820->node_0x4b89520[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89e80->node_0x4b894c0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b894c0->node_0x4b89460[color="#a66be8", fontcolor="#6be871"];    node_0x4b89460->node_0x4b89400[color="#a66be8", fontcolor="#6be871"];    node_0x4b89460->node_0x4b893a0[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b894c0->node_0x4b89340[color="#a66be8", fontcolor="#e87b6b"];    node_0x4b89340->node_0x4b892e0[color="#a66be8", fontcolor="#6be871"];    node_0x4b89340->node_0x4b89280[color="#a66be8", fontcolor="#e87b6b"];}

@@ -56,7 +56,7 @@ size_t readTree(Tree *tree, const char *filename)
 
     char *readPtr = tree_buffer;
     tree->root = readNode(&readPtr, &tree_buffer, lenOfFile);
-
+    free(tree_buffer);
     return TREE_NO_ERRORS;
 }
 

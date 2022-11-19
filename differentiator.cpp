@@ -313,7 +313,7 @@ double calculateNode(Node *node, const char variable, double value)
         case POW_OP:
             return pow(leftValue, rightValue);
         case LOG_OP:
-            return log(rightValue)/log(leftValue);
+            return log(rightValue) / log(leftValue);
         case SIN_OP:
             return sin(rightValue);
         case COS_OP:
