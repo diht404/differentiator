@@ -91,6 +91,8 @@ Node *copyNode(Node *node);
 
 void convConst(Node *node, bool *changed);
 
+void deleteNeutralElements(Node *node, bool *changed);
+
 void printLatex(Tree *tree);
 
 void printLatexNode(const Node *node, FILE *fp);
@@ -123,13 +125,17 @@ double calculateNode(Node *node, const char variable, double value);
 #define LOG(dL, dR) createNode(OPERATION, {.op_value = LOG_OP}, dL, dR)
 #define SIN(dL, dR) createNode(OPERATION, {.op_value = SIN_OP}, dL, dR)
 #define COS(dL, dR) createNode(OPERATION, {.op_value = COS_OP}, dL, dR)
-#define VAL_VALUE node->value.val_value
-#define OP_VALUE node->value.op_value
-#define VAR_VALUE node->value.var_value
-#define IS_OP(OPP) node->node_type == OPERATION && OP_VALUE == OPP
-#define IS_NUM_LEFT node->left->node_type == NUMBER
-#define IS_NUM_RIGHT node->right->node_type == NUMBER
-#define LEFT_VALUE node->left->value.val_value
-#define RIGHT_VALUE node->right->value.val_value
+#define VAL_VALUE (node->value.val_value)
+#define OP_VALUE (node->value.op_value)
+#define VAR_VALUE (node->value.var_value)
+#define IS_OP(OPP) (node->node_type == OPERATION && OP_VALUE == OPP)
+#define IS_NUM_LEFT (node->left->node_type == NUMBER)
+#define IS_NUM_RIGHT (node->right->node_type == NUMBER)
+#define IS_ZERO_LEFT (IS_NUM_LEFT && abs(LEFT_VALUE) < EPS)
+#define IS_ZERO_RIGHT (IS_NUM_RIGHT && abs(RIGHT_VALUE) < EPS)
+#define IS_ONE_LEFT (IS_NUM_LEFT && abs(LEFT_VALUE - 1) < EPS)
+#define IS_ONE_RIGHT (IS_NUM_RIGHT && abs(RIGHT_VALUE - 1) < EPS)
+#define LEFT_VALUE (node->left->value.val_value)
+#define RIGHT_VALUE (node->right->value.val_value)
 
 #endif //DIFFERENTIATOR__DIFFERENTIATOR_H

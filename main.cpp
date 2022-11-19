@@ -21,7 +21,10 @@ int main()
 
     bool changed = false;
     convConst(diff_tree.root, &changed);
+    treeDump(&diff_tree);
 
+    changed = false;
+    deleteNeutralElements(diff_tree.root, &changed);
     treeDump(&diff_tree);
 
     double x = 1.2;

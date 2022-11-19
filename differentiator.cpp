@@ -234,7 +234,7 @@ void convConst(Node *node, bool *changed)
         else if (IS_OP(COS_OP))
             VAL_VALUE = cos(RIGHT_VALUE);
         else if (IS_OP(INCORRECT_OP))
-            VAL_VALUE =  NAN;
+            VAL_VALUE = NAN;
 
         nodeDtor(node->left);
         nodeDtor(node->right);
@@ -247,7 +247,95 @@ void convConst(Node *node, bool *changed)
         printLatexNode(node, LATEX_FILE);
         fprintf(LATEX_FILE, "$\n");
     }
+}
 
+void deleteNeutralElements(Node *node, bool *changed)
+{
+    if (node->right)
+        deleteNeutralElements(node->left, changed);
+    if (node->right)
+        deleteNeutralElements(node->right, changed);
+
+    if (node->left == nullptr || node->right == nullptr)
+        return;
+
+    if (*changed)
+    {
+        fprintf(LATEX_FILE, "\n");
+        addRandomCringePhrase();
+
+        fprintf(LATEX_FILE, "\n");
+        fprintf(LATEX_FILE, "$");
+        printLatexNode(node, LATEX_FILE);
+        fprintf(LATEX_FILE, " = ");
+    }
+    bool change_node = false;
+    if ((IS_ONE_LEFT || IS_ZERO_RIGHT) && IS_OP(POW_OP))
+    {
+        change_node = true;
+        VAL_VALUE = 1;
+    }
+    else if (IS_ZERO_LEFT && (IS_OP(POW_OP) ||
+                              IS_OP(MUL_OP) ||
+                              IS_OP(DIV_OP)))
+    {
+        change_node = true;
+        VAL_VALUE = 0;
+    }
+    else if (IS_ONE_RIGHT && (IS_OP(POW_OP) ||
+                              IS_OP(MUL_OP) ||
+                              IS_OP(DIV_OP)))
+    {
+        Node *left_node = node->left;
+        Node *right_node = node->right;
+        *node = *cL;
+        nodeDtor(left_node);
+        nodeDtor(right_node);
+        *changed = true;
+    }
+    else if (IS_ZERO_LEFT && IS_OP(ADD_OP))
+    {
+        Node *left_node = node->left;
+        Node *right_node = node->right;
+        *node = *cR;
+        nodeDtor(left_node);
+        nodeDtor(right_node);
+        *changed = true;
+    }
+    else if (IS_ZERO_LEFT && IS_OP(SUB_OP))
+    {
+        LEFT_VALUE = -1;
+        node->node_type = OPERATION;
+        OP_VALUE = SUB_OP;
+        *changed = true;
+    }
+    else if (IS_OP(SIN_OP) && IS_NUM_RIGHT)
+    {
+        change_node = true;
+        VAL_VALUE = sin(RIGHT_VALUE);
+    }
+    else if (IS_OP(COS_OP) && IS_NUM_RIGHT)
+    {
+        change_node = true;
+        VAL_VALUE = cos(RIGHT_VALUE);
+    }
+
+    if (change_node)
+    {
+        *changed = true;
+
+        nodeDtor(node->left);
+        nodeDtor(node->right);
+        node->node_type = NUMBER;
+        node->left = nullptr;
+        node->right = nullptr;
+    }
+
+    if (*changed)
+    {
+        printLatexNode(node, LATEX_FILE);
+        fprintf(LATEX_FILE, "$\n");
+    }
 }
 
 void printLatex(Tree *tree)
