@@ -194,6 +194,62 @@ Node *copyNode(Node *node)
     return new_node;
 }
 
+void convConst(Node *node, bool *changed)
+{
+    if (node->right)
+        convConst(node->left, changed);
+    if (node->right)
+        convConst(node->right, changed);
+
+    if (node->left == nullptr || node->right == nullptr)
+        return;
+
+    if (*changed)
+    {
+        fprintf(LATEX_FILE, "\n");
+        addRandomCringePhrase();
+
+        fprintf(LATEX_FILE, "\n");
+        fprintf(LATEX_FILE, "$");
+        printLatexNode(node, LATEX_FILE);
+        fprintf(LATEX_FILE, " = ");
+    }
+    if (IS_NUM_LEFT && IS_NUM_RIGHT)
+    {
+        *changed = true;
+        if (IS_OP(ADD_OP))
+            VAL_VALUE = LEFT_VALUE + RIGHT_VALUE;
+        else if (IS_OP(SUB_OP))
+            VAL_VALUE = LEFT_VALUE - RIGHT_VALUE;
+        else if (IS_OP(MUL_OP))
+            VAL_VALUE = LEFT_VALUE * RIGHT_VALUE;
+        else if (IS_OP(DIV_OP))
+            VAL_VALUE = LEFT_VALUE / RIGHT_VALUE;
+        else if (IS_OP(POW_OP))
+            VAL_VALUE = pow(LEFT_VALUE, RIGHT_VALUE);
+        else if (IS_OP(LOG_OP))
+            VAL_VALUE = log(RIGHT_VALUE) / log(RIGHT_VALUE);
+        else if (IS_OP(SIN_OP))
+            VAL_VALUE = sin(RIGHT_VALUE);
+        else if (IS_OP(COS_OP))
+            VAL_VALUE = cos(RIGHT_VALUE);
+        else if (IS_OP(INCORRECT_OP))
+            VAL_VALUE =  NAN;
+
+        nodeDtor(node->left);
+        nodeDtor(node->right);
+        node->node_type = NUMBER;
+        node->left = nullptr;
+        node->right = nullptr;
+    }
+    if (*changed)
+    {
+        printLatexNode(node, LATEX_FILE);
+        fprintf(LATEX_FILE, "$\n");
+    }
+
+}
+
 void printLatex(Tree *tree)
 {
     fprintf(LATEX_FILE, "$");

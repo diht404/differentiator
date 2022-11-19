@@ -18,6 +18,12 @@ int main()
     treeCtor(&diff_tree);
     diff_tree.root = diff(tree.root, 'x');
     treeDump(&diff_tree);
+
+    bool changed = false;
+    convConst(diff_tree.root, &changed);
+
+    treeDump(&diff_tree);
+
     double x = 1.2;
     char var_name = 'x';
     printf("f'(%lg) = %lg\n",
