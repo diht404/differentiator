@@ -58,7 +58,7 @@ const char CRINGE_PHRASES[][BUFFER_SIZE] =
      "В результате простых рассуждений можно получить\n",
      "Нетрудно догадаться, что\n",
      "Отсюда очевидно следует, что\n",
-     "Примем без доказаельства, что",
+     "Примем без доказательства, что",
      "Доказательство данного факта можно найти в "
      "\\href{https://www.youtube.com/watch?v=dQw4w9WgXcQ}{видеолекции}\n",
      "Доказательство будет дано "
@@ -73,13 +73,13 @@ size_t set_latex_file(const char *filename);
 
 size_t close_latex_file();
 
-Node *diff(const Node *node);
+Node *diff(const Node *node, const char variable);
 
-Node *diffOperation(const Node *node);
+Node *diffOperation(const Node *node, const char variable);
 
-Node *diffLog(const Node *node);
+Node *diffLog(const Node *node, const char variable);
 
-Node *diffPop(const Node *node);
+Node *diffPop(const Node *node, const char variable);
 
 Node *createNum(double value);
 
@@ -108,8 +108,8 @@ void printLatexOrdinaryNode(const Node *node,
                             char node_value[BUFFER_SIZE],
                             FILE *fp);
 
-#define dL diff(node->left)
-#define dR diff(node->right)
+#define dL diff(node->left, variable)
+#define dR diff(node->right, variable)
 #define cL copyNode(node->left)
 #define cR copyNode(node->right)
 #define ADD(dL, dR) createNode(OPERATION, {.op_value = ADD_OP}, dL, dR)

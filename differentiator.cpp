@@ -36,7 +36,7 @@ size_t addRandomCringePhrase()
     fprintf(LATEX_FILE, "%s", CRINGE_PHRASES[rand() % len]);
 }
 
-Node *diff(const Node *node)
+Node *diff(const Node *node, const char variable)
 {
     Node *return_node = nullptr;
     switch (node->node_type)
@@ -45,10 +45,13 @@ Node *diff(const Node *node)
             return_node = createNum(0);
             break;
         case VARIABLE:
-            return_node = createNum(1);
+            if (node->value.var_value == variable)
+                return_node = createNum(1);
+            else
+                return_node = createNum(0);
             break;
         case OPERATION:
-            return_node = diffOperation(node);
+            return_node = diffOperation(node, variable);
             break;
         case INCORRECT_TYPE:
             fprintf(stderr, "Incorrect node type.\n");
@@ -69,7 +72,7 @@ Node *diff(const Node *node)
     return return_node;
 }
 
-Node *diffOperation(const Node *node)
+Node *diffOperation(const Node *node, const char variable)
 {
     switch (node->value.op_value)
     {
@@ -85,9 +88,9 @@ Node *diffOperation(const Node *node)
                            MUL(cL, dR)),
                        MUL(cR, cR));
         case POW_OP:
-            return diffPop(node);
+            return diffPop(node, variable);
         case LOG_OP:
-            return diffLog(node);
+            return diffLog(node, variable);
         case SIN_OP:
             return MUL(COS(createNum(0), cR), dR);
         case COS_OP:
@@ -102,7 +105,7 @@ Node *diffOperation(const Node *node)
     }
 }
 
-Node *diffLog(const Node *node)
+Node *diffLog(const Node *node, const char variable)
 {
     // log_a(b)
     if (node->left->node_type == NUMBER &&
@@ -120,7 +123,7 @@ Node *diffLog(const Node *node)
                        LOG(createNum(EXP), cL)));
 }
 
-Node *diffPop(const Node *node)
+Node *diffPop(const Node *node, const char variable)
 {
     // a^b
     if (node->left->node_type == NUMBER &&

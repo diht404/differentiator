@@ -14,7 +14,7 @@ int main()
 
     printLatex(&tree);
 
-    tree.root = diff(tree.root);
+    tree.root = diff(tree.root, 'x');
     treeDump(&tree);
 
     treeCloseLogFile();
@@ -22,7 +22,6 @@ int main()
     return 0;
 }
 
-// TODO: generate matan diff
 // TODO: calculator
 // TODO: sin, cos, log
 // TODO: long variables
