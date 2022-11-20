@@ -95,6 +95,13 @@ void convConst(Node *node, bool *changed);
 
 void deleteNeutralElements(Node *node, bool *changed);
 
+void getTangentEquation(Tree *tree,
+                        Tree *diff_tree,
+                        const char var_name,
+                        double value);
+
+double calculateNode(Node *node, const char variable, double value);
+
 void printLatex(Tree *tree);
 
 void printLatexNode(const Node *node, FILE *fp);
@@ -113,7 +120,6 @@ void printLatexOrdinaryNode(const Node *node,
                             char node_value[BUFFER_SIZE],
                             FILE *fp);
 
-double calculateNode(Node *node, const char variable, double value);
 
 #define dL diff(node->left, variable)
 #define dR diff(node->right, variable)

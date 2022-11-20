@@ -27,6 +27,8 @@ int main()
            x,
            calculateNode(diff_tree.root, var_name, x));
 
+    getTangentEquation(&tree, &diff_tree, var_name, x);
+
     treeDtor(&tree);
     treeDtor(&diff_tree);
     treeCloseLogFile();
@@ -37,7 +39,6 @@ int main()
 // TODO: sin, cos, log
 // TODO: long variables
 // TODO: replace expressions
-// TODO: tangent params
 // TODO: more variables diff
 // TODO: taylor, error rate
 // TODO: curve graph

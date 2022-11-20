@@ -293,15 +293,15 @@ void deleteNeutralElements(Node *node, bool *changed)
         VAL_VALUE = 1;
     }
     else if (IS_ZERO_LEFT && (IS_OP(POW_OP) ||
-                              IS_OP(MUL_OP) ||
-                              IS_OP(DIV_OP)))
+        IS_OP(MUL_OP) ||
+        IS_OP(DIV_OP)))
     {
         change_node = true;
         VAL_VALUE = 0;
     }
     else if (IS_ONE_RIGHT && (IS_OP(POW_OP) ||
-                              IS_OP(MUL_OP) ||
-                              IS_OP(DIV_OP)))
+        IS_OP(MUL_OP) ||
+        IS_OP(DIV_OP)))
     {
         Node *left_node = node->left;
         nodeDtor(node->right);
@@ -364,6 +364,74 @@ void deleteNeutralElements(Node *node, bool *changed)
     {
         printLatexNode(node, LATEX_FILE);
         fprintf(LATEX_FILE, "$\n");
+    }
+}
+
+void getTangentEquation(Tree *tree,
+                        Tree *diff_tree,
+                        const char var_name,
+                        double value)
+{
+    double f_at_value = calculateNode(tree->root, var_name, value);
+    double k = calculateNode(diff_tree->root, var_name, value);
+    fprintf(LATEX_FILE, "\n\n\\textbf{Tangent equation at %lg:}\n\n", value);
+    if (abs(k) < EPS)
+        fprintf(LATEX_FILE, "$y = %lg$\n", f_at_value);
+    else
+        fprintf(LATEX_FILE,
+                "$y = %lg * x + %lg$\n",
+                k,
+                f_at_value - k * value);
+}
+
+double calculateNode(Node *node, const char variable, double value)
+{
+    double leftValue = NAN;
+    double rightValue = NAN;
+
+    if (node->left)
+        leftValue = calculateNode(node->left, variable, value);
+    if (node->right)
+        rightValue = calculateNode(node->right, variable, value);
+
+    if (node->node_type == NUMBER)
+        return node->value.val_value;
+
+    if (node->node_type == VARIABLE)
+    {
+        if (node->value.var_value == variable)
+            return value;
+        else
+        {
+            fprintf(stderr, "Unknown variable %c\n", variable);
+            return NAN;
+        }
+    }
+
+    switch (node->value.op_value)
+    {
+        case ADD_OP:
+            return leftValue + rightValue;
+        case SUB_OP:
+            return leftValue - rightValue;
+        case MUL_OP:
+            return leftValue * rightValue;
+        case DIV_OP:
+            return leftValue / rightValue;
+        case POW_OP:
+            return pow(leftValue, rightValue);
+        case LOG_OP:
+            return log(rightValue) / log(leftValue);
+        case SIN_OP:
+            return sin(rightValue);
+        case COS_OP:
+            return cos(rightValue);
+        case INCORRECT_OP:
+            fprintf(stderr, "Incorrect operation.\n");
+            return NAN;
+        default:
+            fprintf(stderr, "Unknown operation.\n");
+            return NAN;
     }
 }
 
@@ -454,56 +522,4 @@ void printLatexOrdinaryNode(const Node *node,
     if (node->right)
         printLatexNode(node->right, fp);
     fprintf(fp, ")");
-}
-
-double calculateNode(Node *node, const char variable, double value)
-{
-    double leftValue = NAN;
-    double rightValue = NAN;
-
-    if (node->left)
-        leftValue = calculateNode(node->left, variable, value);
-    if (node->right)
-        rightValue = calculateNode(node->right, variable, value);
-
-    if (node->node_type == NUMBER)
-        return node->value.val_value;
-
-    if (node->node_type == VARIABLE)
-    {
-        if (node->value.var_value == variable)
-            return value;
-        else
-        {
-            fprintf(stderr, "Unknown variable %c\n", variable);
-            return NAN;
-        }
-    }
-
-
-    switch (node->value.op_value)
-    {
-        case ADD_OP:
-            return leftValue + rightValue;
-        case SUB_OP:
-            return leftValue - rightValue;
-        case MUL_OP:
-            return leftValue * rightValue;
-        case DIV_OP:
-            return leftValue / rightValue;
-        case POW_OP:
-            return pow(leftValue, rightValue);
-        case LOG_OP:
-            return log(rightValue) / log(leftValue);
-        case SIN_OP:
-            return sin(rightValue);
-        case COS_OP:
-            return cos(rightValue);
-        case INCORRECT_OP:
-            fprintf(stderr, "Incorrect operation.\n");
-            return NAN;
-        default:
-            fprintf(stderr, "Unknown operation.\n");
-            return NAN;
-    }
 }
