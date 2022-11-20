@@ -478,7 +478,9 @@ void printLatexNode(const Node *node, FILE *fp)
 {
     char node_value[BUFFER_SIZE] = "";
     getValueOfNode(node, &node_value);
-    if (strcmp(node_value, "sin") == 0)
+    if (node->node_type == NUMBER || node->node_type == VARIABLE)
+        fprintf(fp, " %s ", node_value);
+    else if (strcmp(node_value, "sin") == 0)
         printLatexSinNode(node, fp);
     else if (strcmp(node_value, "cos") == 0)
         printLatexCosNode(node, fp);
@@ -494,16 +496,18 @@ void printLatexNode(const Node *node, FILE *fp)
 
 void printLatexSinNode(const Node *node, FILE *fp)
 {
-    fprintf(fp, "sin");
+    fprintf(fp, "sin(");
     if (node->right)
         printLatexNode(node->right, fp);
+    fprintf(fp, ")");
 }
 
 void printLatexCosNode(const Node *node, FILE *fp)
 {
-    fprintf(fp, "cos");
+    fprintf(fp, "cos(");
     if (node->right)
         printLatexNode(node->right, fp);
+    fprintf(fp, ")");
 }
 
 void printLatexLogNode(const Node *node, FILE *fp)
