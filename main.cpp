@@ -28,6 +28,7 @@ int main()
            calculateNode(diff_tree.root, var_name, x));
 
     getTangentEquation(&tree, &diff_tree, var_name, x);
+    plotGraph(&tree, 'x', 1.1, 10, 1000, "graph.txt");
 
     treeDtor(&tree);
     treeDtor(&diff_tree);
@@ -41,4 +42,3 @@ int main()
 // TODO: replace expressions
 // TODO: more variables diff
 // TODO: taylor, error rate
-// TODO: curve graph

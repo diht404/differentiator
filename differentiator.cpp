@@ -374,7 +374,9 @@ void getTangentEquation(Tree *tree,
 {
     double f_at_value = calculateNode(tree->root, var_name, value);
     double k = calculateNode(diff_tree->root, var_name, value);
-    fprintf(LATEX_FILE, "\n\n\\textbf{Tangent equation at %lg:}\n\n", value);
+    fprintf(LATEX_FILE,
+            "\n\n\\textbf{Tangent equation at %lg:}\n\n",
+            value);
     if (abs(k) < EPS)
         fprintf(LATEX_FILE, "$y = %lg$\n", f_at_value);
     else
@@ -382,6 +384,36 @@ void getTangentEquation(Tree *tree,
                 "$y = %lg * x + %lg$\n",
                 k,
                 f_at_value - k * value);
+}
+
+void plotGraph(Tree *tree,
+               char var_name,
+               double left,
+               double right,
+               size_t num,
+               const char *filename)
+{
+    FILE *fp = fopen(filename, "w");
+
+    double step = (right - left) / num;
+    double x = NAN;
+    double f_at_x = NAN;
+    for (size_t i = 0; i < num; i++)
+    {
+        x = left + step * i;
+        f_at_x = calculateNode(tree->root, var_name, x);
+        fprintf(fp, "%lf\t%lf\n", x, f_at_x);
+    }
+    fclose(fp);
+
+    char command[BUFFER_SIZE] = "";
+    sprintf(command,
+            "gnuplot -e \"set terminal png size 768,480; "
+            "set output 'graph.png'; plot [%lg: %lg] '%s'\"",
+            left,
+            right,
+            filename);
+    system(command);
 }
 
 double calculateNode(Node *node, const char variable, double value)

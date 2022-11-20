@@ -100,6 +100,13 @@ void getTangentEquation(Tree *tree,
                         const char var_name,
                         double value);
 
+void plotGraph(Tree *tree,
+               char var_name,
+               double left,
+               double right,
+               size_t num,
+               const char *filename);
+
 double calculateNode(Node *node, const char variable, double value);
 
 void printLatex(Tree *tree);
