@@ -19,8 +19,7 @@ int main()
     diff_tree.root = diff(tree.root, 'x');
     treeDump(&diff_tree);
 
-    simplifyTree(&diff_tree);
-
+    simplifyNode(diff_tree.root);
     double x = 1.2;
     char var_name = 'x';
     printf("f'(%lg) = %lg\n",
@@ -29,6 +28,10 @@ int main()
 
     getTangentEquation(&tree, &diff_tree, var_name, x);
     plotGraph(&tree, 'x', 1.1, 10, 1000, "graph.txt");
+
+    treeCtor(&diff_tree);
+    int n = 3;
+//    taylorN(tree.root, 'x', n);
 
     treeDtor(&tree);
     treeDtor(&diff_tree);

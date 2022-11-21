@@ -36,16 +36,26 @@ size_t addRandomCringePhrase()
     fprintf(LATEX_FILE, "%s", CRINGE_PHRASES[rand() % len]);
 }
 
+void taylorN(Node *node, const char variable, int n)
+{
+    fprintf(LATEX_FILE, "\n\nTaylor of function\n\n");
+    for (int i = 0; i < n; i++)
+    {
+        node = diff(node, variable);
+        simplifyNode(node);
+    }
+}
+
 Node *diff(const Node *node, const char variable)
 {
     Node *return_node = nullptr;
-    switch (node->node_type)
+    switch (NODE_TYPE)
     {
         case NUMBER:
             return_node = createNum(0);
             break;
         case VARIABLE:
-            if (node->value.var_value == variable)
+            if (VAR_VALUE == variable)
                 return_node = createNum(1);
             else
                 return_node = createNum(0);
@@ -169,10 +179,10 @@ Node *createNode(NodeType node_type,
                  Node *right_node)
 {
     Node *node = (Node *) calloc(1, sizeof(node[0]));
-    node->left = left_node;
-    node->right = right_node;
-    node->node_type = node_type;
-    node->value = node_value;
+    LEFT_NODE = left_node;
+    RIGHT_NODE = right_node;
+    NODE_TYPE = node_type;
+    VALUE = node_value;
 }
 
 Node *copyNode(Node *node)
@@ -183,10 +193,10 @@ Node *copyNode(Node *node)
     Node *new_left = nullptr;
     Node *new_right = nullptr;
     if (new_node->left)
-        new_left = copyNode(node->left);
+        new_left = copyNode(LEFT_NODE);
 
     if (new_node->right)
-        new_right = copyNode(node->right);
+        new_right = copyNode(RIGHT_NODE);
 
     new_node->left = new_left;
     new_node->right = new_right;
@@ -194,31 +204,31 @@ Node *copyNode(Node *node)
     return new_node;
 }
 
-void simplifyTree(Tree *tree)
+void simplifyNode(Node *node)
 {
     bool changed = true;
     while (changed)
     {
         changed = false;
-        convConst(tree->root, &changed);
-        if (changed)
-            treeDump(tree);
+        convConst(node, &changed);
+//        if (changed)
+//            treeDump(tree);
 
         changed = false;
-        deleteNeutralElements(tree->root, &changed);
-        if (changed)
-            treeDump(tree);
+        deleteNeutralElements(node, &changed);
+//        if (changed)
+//            treeDump(tree);
     }
 }
 
 void convConst(Node *node, bool *changed)
 {
-    if (node->right)
-        convConst(node->left, changed);
-    if (node->right)
-        convConst(node->right, changed);
+    if (LEFT_NODE)
+        convConst(LEFT_NODE, changed);
+    if (RIGHT_NODE)
+        convConst(RIGHT_NODE, changed);
 
-    if (node->left == nullptr || node->right == nullptr)
+    if (LEFT_NODE == nullptr || RIGHT_NODE == nullptr)
         return;
 
     if (*changed)
@@ -253,11 +263,11 @@ void convConst(Node *node, bool *changed)
         else if (IS_OP(INCORRECT_OP))
             VAL_VALUE = NAN;
 
-        nodeDtor(node->left);
-        nodeDtor(node->right);
-        node->node_type = NUMBER;
-        node->left = nullptr;
-        node->right = nullptr;
+        nodeDtor(LEFT_NODE);
+        nodeDtor(RIGHT_NODE);
+        NODE_TYPE = NUMBER;
+        LEFT_NODE = nullptr;
+        RIGHT_NODE = nullptr;
     }
     if (*changed)
     {
@@ -268,12 +278,12 @@ void convConst(Node *node, bool *changed)
 
 void deleteNeutralElements(Node *node, bool *changed)
 {
-    if (node->right)
-        deleteNeutralElements(node->left, changed);
-    if (node->right)
-        deleteNeutralElements(node->right, changed);
+    if (LEFT_NODE)
+        deleteNeutralElements(LEFT_NODE, changed);
+    if (RIGHT_NODE)
+        deleteNeutralElements(RIGHT_NODE, changed);
 
-    if (node->left == nullptr || node->right == nullptr)
+    if (LEFT_NODE == nullptr || RIGHT_NODE == nullptr)
         return;
 
     if (*changed)
@@ -286,85 +296,74 @@ void deleteNeutralElements(Node *node, bool *changed)
         printLatexNode(node, LATEX_FILE);
         fprintf(LATEX_FILE, " = ");
     }
-    bool change_node = false;
     if ((IS_ONE_LEFT || IS_ZERO_RIGHT) && IS_OP(POW_OP))
-    {
-        change_node = true;
-        VAL_VALUE = 1;
-    }
-    else if (IS_ZERO_LEFT && (IS_OP(POW_OP) ||
-        IS_OP(MUL_OP) ||
-        IS_OP(DIV_OP)))
-    {
-        change_node = true;
-        VAL_VALUE = 0;
-    }
+        changeNodeTypeToNumberNode(node, 1, changed);
+    else if (IS_ZERO_LEFT &&
+            (IS_OP(POW_OP) || IS_OP(MUL_OP) || IS_OP(DIV_OP)))
+        changeNodeTypeToNumberNode(node, 0, changed);
     else if (IS_ONE_RIGHT && (IS_OP(POW_OP) ||
         IS_OP(MUL_OP) ||
         IS_OP(DIV_OP)))
     {
-        Node *left_node = node->left;
-        nodeDtor(node->right);
-        node->left = nullptr;
-        node->right = nullptr;
-        node->node_type = left_node->node_type;
-        node->value = left_node->value;
+        Node *left_node = LEFT_NODE;
+        nodeDtor(RIGHT_NODE);
+        LEFT_NODE = nullptr;
+        RIGHT_NODE = nullptr;
+        NODE_TYPE = left_node->node_type;
+        VALUE = left_node->value;
         if (left_node->left)
-            node->left = copyNode(left_node->left);
+            LEFT_NODE = copyNode(left_node->left);
         if (left_node->right)
-            node->right = copyNode(left_node->right);
+            RIGHT_NODE = copyNode(left_node->right);
         nodeDtor(left_node);
         *changed = true;
     }
     else if (IS_ZERO_LEFT && IS_OP(ADD_OP))
     {
-        Node *right_node = node->right;
-        nodeDtor(node->left);
-        node->left = nullptr;
-        node->right = nullptr;
-        node->node_type = right_node->node_type;
-        node->value = right_node->value;
+        Node *right_node = RIGHT_NODE;
+        nodeDtor(LEFT_NODE);
+        LEFT_NODE = nullptr;
+        RIGHT_NODE = nullptr;
+        NODE_TYPE = right_node->node_type;
+        VALUE = right_node->value;
         if (right_node->left)
-            node->left = copyNode(right_node->left);
+            LEFT_NODE = copyNode(right_node->left);
         if (right_node->right)
-            node->right = copyNode(right_node->right);
+            RIGHT_NODE = copyNode(right_node->right);
         nodeDtor(right_node);
         *changed = true;
     }
     else if (IS_ZERO_LEFT && IS_OP(SUB_OP))
     {
         LEFT_VALUE = -1;
-        node->node_type = OPERATION;
+        NODE_TYPE = OPERATION;
         OP_VALUE = SUB_OP;
         *changed = true;
     }
     else if (IS_OP(SIN_OP) && IS_NUM_RIGHT)
-    {
-        change_node = true;
-        VAL_VALUE = sin(RIGHT_VALUE);
-    }
+        changeNodeTypeToNumberNode(node, sin(RIGHT_VALUE), changed);
     else if (IS_OP(COS_OP) && IS_NUM_RIGHT)
-    {
-        change_node = true;
-        VAL_VALUE = cos(RIGHT_VALUE);
-    }
-
-    if (change_node)
-    {
-        *changed = true;
-
-        nodeDtor(node->left);
-        nodeDtor(node->right);
-        node->node_type = NUMBER;
-        node->left = nullptr;
-        node->right = nullptr;
-    }
+        changeNodeTypeToNumberNode(node, cos(RIGHT_VALUE), changed);
 
     if (*changed)
     {
         printLatexNode(node, LATEX_FILE);
         fprintf(LATEX_FILE, "$\n");
     }
+}
+
+void changeNodeTypeToNumberNode(Node *node,
+                                double value,
+                                bool *changed)
+{
+    *changed = true;
+
+    nodeDtor(LEFT_NODE);
+    nodeDtor(RIGHT_NODE);
+    NODE_TYPE = NUMBER;
+    VAL_VALUE = value;
+    LEFT_NODE = nullptr;
+    RIGHT_NODE = nullptr;
 }
 
 void getTangentEquation(Tree *tree,
@@ -421,17 +420,17 @@ double calculateNode(Node *node, const char variable, double value)
     double leftValue = NAN;
     double rightValue = NAN;
 
-    if (node->left)
-        leftValue = calculateNode(node->left, variable, value);
-    if (node->right)
-        rightValue = calculateNode(node->right, variable, value);
+    if (LEFT_NODE)
+        leftValue = calculateNode(LEFT_NODE, variable, value);
+    if (RIGHT_NODE)
+        rightValue = calculateNode(RIGHT_NODE, variable, value);
 
-    if (node->node_type == NUMBER)
+    if (NODE_TYPE == NUMBER)
         return node->value.val_value;
 
-    if (node->node_type == VARIABLE)
+    if (NODE_TYPE == VARIABLE)
     {
-        if (node->value.var_value == variable)
+        if (VAR_VALUE == variable)
             return value;
         else
         {
@@ -440,7 +439,7 @@ double calculateNode(Node *node, const char variable, double value)
         }
     }
 
-    switch (node->value.op_value)
+    switch (OP_VALUE)
     {
         case ADD_OP:
             return leftValue + rightValue;
@@ -497,51 +496,51 @@ void printLatexNode(const Node *node, FILE *fp)
 void printLatexSinNode(const Node *node, FILE *fp)
 {
     fprintf(fp, "sin(");
-    if (node->right)
-        printLatexNode(node->right, fp);
+    if (RIGHT_NODE)
+        printLatexNode(RIGHT_NODE, fp);
     fprintf(fp, ")");
 }
 
 void printLatexCosNode(const Node *node, FILE *fp)
 {
     fprintf(fp, "cos(");
-    if (node->right)
-        printLatexNode(node->right, fp);
+    if (RIGHT_NODE)
+        printLatexNode(RIGHT_NODE, fp);
     fprintf(fp, ")");
 }
 
 void printLatexLogNode(const Node *node, FILE *fp)
 {
     fprintf(fp, "\\log_{");
-    if (node->left)
-        printLatexNode(node->left, fp);
+    if (LEFT_NODE)
+        printLatexNode(LEFT_NODE, fp);
     fprintf(fp, "}");
 
     fprintf(fp, "{");
-    if (node->right)
-        printLatexNode(node->right, fp);
+    if (RIGHT_NODE)
+        printLatexNode(RIGHT_NODE, fp);
     fprintf(fp, "}");
 }
 
 void printLatexDivNode(const Node *node, FILE *fp)
 {
     fprintf(fp, "\\frac{");
-    if (node->left)
-        printLatexNode(node->left, fp);
+    if (LEFT_NODE)
+        printLatexNode(LEFT_NODE, fp);
     fprintf(fp, "}{");
-    if (node->right)
-        printLatexNode(node->right, fp);
+    if (RIGHT_NODE)
+        printLatexNode(RIGHT_NODE, fp);
     fprintf(fp, "}\n");
 }
 
 void printLatexPowNode(const Node *node, FILE *fp)
 {
     fprintf(fp, "{");
-    if (node->left)
-        printLatexNode(node->left, fp);
+    if (LEFT_NODE)
+        printLatexNode(LEFT_NODE, fp);
     fprintf(fp, "}^{");
-    if (node->right)
-        printLatexNode(node->right, fp);
+    if (RIGHT_NODE)
+        printLatexNode(RIGHT_NODE, fp);
     fprintf(fp, "}");
 }
 
@@ -550,12 +549,12 @@ void printLatexOrdinaryNode(const Node *node,
                             FILE *fp)
 {
     fprintf(fp, "(");
-    if (node->left)
-        printLatexNode(node->left, fp);
+    if (LEFT_NODE)
+        printLatexNode(LEFT_NODE, fp);
 
     fprintf(fp, " %s ", node_value);
 
-    if (node->right)
-        printLatexNode(node->right, fp);
+    if (RIGHT_NODE)
+        printLatexNode(RIGHT_NODE, fp);
     fprintf(fp, ")");
 }
