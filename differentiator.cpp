@@ -283,12 +283,14 @@ void deleteNeutralElements(Node *node, bool *changed)
     if ((IS_ONE_LEFT || IS_ZERO_RIGHT) && IS_OP(POW_OP))
         changeNodeTypeToNumber(node, 1, changed);
     // 0 ^ f(x), 0 * f(x), 0 / f(x)
-    else if (IS_ZERO_LEFT &&
-            (IS_OP(POW_OP) || IS_OP(MUL_OP) || IS_OP(DIV_OP)))
+    else if (IS_ZERO_LEFT && (IS_OP(POW_OP) ||
+                              IS_OP(MUL_OP) ||
+                              IS_OP(DIV_OP)))
         changeNodeTypeToNumber(node, 0, changed);
     // f(x) ^ 1, f(x) * 1, f(x) / 1, f(x) + 0
-    else if ((IS_ONE_RIGHT &&
-                (IS_OP(POW_OP) || IS_OP(MUL_OP) || IS_OP(DIV_OP)))
+    else if ((IS_ONE_RIGHT && (IS_OP(POW_OP) ||
+                               IS_OP(MUL_OP) ||
+                               IS_OP(DIV_OP)))
             || (IS_ZERO_RIGHT && IS_OP(ADD_OP)))
         moveNodeUp(node, LEFT_NODE, RIGHT_NODE, changed);
     // 0 + f(x), 1 * f(x)
