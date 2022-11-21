@@ -53,7 +53,7 @@ struct Node
 struct Tree
 {
     Node *root = nullptr;
-    size_t size = 0;
+//    size_t size = 0;
 };
 
 enum TreeErrors

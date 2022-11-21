@@ -97,9 +97,18 @@ void convConst(Node *node, bool *changed);
 
 void deleteNeutralElements(Node *node, bool *changed);
 
-void changeNodeTypeToNumberNode(Node *node,
-                                double value,
-                                bool *changed);
+void moveNodeUp(Node *node,
+                Node *node_to_up,
+                Node *node_to_delete,
+                bool *changed);
+
+void changeNodeTypeToNumber(Node *node,
+                            double value,
+                            bool *changed);
+
+void startLatexFormula(const Node *node);
+
+void endLatexFormula(const Node *node);
 
 void getTangentEquation(Tree *tree,
                         Tree *diff_tree,

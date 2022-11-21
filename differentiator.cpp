@@ -70,15 +70,9 @@ Node *diff(const Node *node, const char variable)
             fprintf(stderr, "Unknown node type.\n");
             break;
     }
-    fprintf(LATEX_FILE, "\n");
-    addRandomCringePhrase();
-
-    fprintf(LATEX_FILE, "\n");
-    fprintf(LATEX_FILE, "$");
-    printLatexNode(node, LATEX_FILE);
+    startLatexFormula(node);
     fprintf(LATEX_FILE, "' = ");
-    printLatexNode(return_node, LATEX_FILE);
-    fprintf(LATEX_FILE, "$\n");
+    endLatexFormula(return_node);
     return return_node;
 }
 
@@ -165,7 +159,6 @@ Node *diffPop(const Node *node, const char variable)
 
 Node *createNum(double value)
 {
-
     Node *node = createNode(NUMBER,
                             {.val_value = value},
                             nullptr,
@@ -207,17 +200,20 @@ Node *copyNode(Node *node)
 void simplifyNode(Node *node)
 {
     bool changed = true;
+    Tree tree = {};
+    treeCtor(&tree);
+    tree.root = node;
     while (changed)
     {
         changed = false;
         convConst(node, &changed);
-//        if (changed)
-//            treeDump(tree);
+        if (changed)
+            treeDump(&tree);
 
         changed = false;
         deleteNeutralElements(node, &changed);
-//        if (changed)
-//            treeDump(tree);
+        if (changed)
+            treeDump(&tree);
     }
 }
 
@@ -233,12 +229,7 @@ void convConst(Node *node, bool *changed)
 
     if (*changed)
     {
-        fprintf(LATEX_FILE, "\n");
-        addRandomCringePhrase();
-
-        fprintf(LATEX_FILE, "\n");
-        fprintf(LATEX_FILE, "$");
-        printLatexNode(node, LATEX_FILE);
+        startLatexFormula(node);
         fprintf(LATEX_FILE, " = ");
     }
     if (IS_NUM_LEFT && IS_NUM_RIGHT)
@@ -270,10 +261,7 @@ void convConst(Node *node, bool *changed)
         RIGHT_NODE = nullptr;
     }
     if (*changed)
-    {
-        printLatexNode(node, LATEX_FILE);
-        fprintf(LATEX_FILE, "$\n");
-    }
+        endLatexFormula(node);
 }
 
 void deleteNeutralElements(Node *node, bool *changed)
@@ -288,51 +276,26 @@ void deleteNeutralElements(Node *node, bool *changed)
 
     if (*changed)
     {
-        fprintf(LATEX_FILE, "\n");
-        addRandomCringePhrase();
-
-        fprintf(LATEX_FILE, "\n");
-        fprintf(LATEX_FILE, "$");
-        printLatexNode(node, LATEX_FILE);
+        startLatexFormula(node);
         fprintf(LATEX_FILE, " = ");
     }
+    // 1 ^ f(x), f(x) ^ 0
     if ((IS_ONE_LEFT || IS_ZERO_RIGHT) && IS_OP(POW_OP))
-        changeNodeTypeToNumberNode(node, 1, changed);
+        changeNodeTypeToNumber(node, 1, changed);
+    // 0 ^ f(x), 0 * f(x), 0 / f(x)
     else if (IS_ZERO_LEFT &&
             (IS_OP(POW_OP) || IS_OP(MUL_OP) || IS_OP(DIV_OP)))
-        changeNodeTypeToNumberNode(node, 0, changed);
-    else if (IS_ONE_RIGHT && (IS_OP(POW_OP) ||
-        IS_OP(MUL_OP) ||
-        IS_OP(DIV_OP)))
-    {
-        Node *left_node = LEFT_NODE;
-        nodeDtor(RIGHT_NODE);
-        LEFT_NODE = nullptr;
-        RIGHT_NODE = nullptr;
-        NODE_TYPE = left_node->node_type;
-        VALUE = left_node->value;
-        if (left_node->left)
-            LEFT_NODE = copyNode(left_node->left);
-        if (left_node->right)
-            RIGHT_NODE = copyNode(left_node->right);
-        nodeDtor(left_node);
-        *changed = true;
-    }
-    else if (IS_ZERO_LEFT && IS_OP(ADD_OP))
-    {
-        Node *right_node = RIGHT_NODE;
-        nodeDtor(LEFT_NODE);
-        LEFT_NODE = nullptr;
-        RIGHT_NODE = nullptr;
-        NODE_TYPE = right_node->node_type;
-        VALUE = right_node->value;
-        if (right_node->left)
-            LEFT_NODE = copyNode(right_node->left);
-        if (right_node->right)
-            RIGHT_NODE = copyNode(right_node->right);
-        nodeDtor(right_node);
-        *changed = true;
-    }
+        changeNodeTypeToNumber(node, 0, changed);
+    // f(x) ^ 1, f(x) * 1, f(x) / 1, f(x) + 0
+    else if ((IS_ONE_RIGHT &&
+                (IS_OP(POW_OP) || IS_OP(MUL_OP) || IS_OP(DIV_OP)))
+            || (IS_ZERO_RIGHT && IS_OP(ADD_OP)))
+        moveNodeUp(node, LEFT_NODE, RIGHT_NODE, changed);
+    // 0 + f(x), 1 * f(x)
+    else if ((IS_ZERO_LEFT && IS_OP(ADD_OP)) ||
+             (IS_ONE_LEFT && IS_OP(MUL_OP)))
+        moveNodeUp(node, RIGHT_NODE, LEFT_NODE, changed);
+    // 0 - f(x)
     else if (IS_ZERO_LEFT && IS_OP(SUB_OP))
     {
         LEFT_VALUE = -1;
@@ -340,30 +303,62 @@ void deleteNeutralElements(Node *node, bool *changed)
         OP_VALUE = SUB_OP;
         *changed = true;
     }
+    // sin(number)
     else if (IS_OP(SIN_OP) && IS_NUM_RIGHT)
-        changeNodeTypeToNumberNode(node, sin(RIGHT_VALUE), changed);
+        changeNodeTypeToNumber(node, sin(RIGHT_VALUE), changed);
+    // cos(number)
     else if (IS_OP(COS_OP) && IS_NUM_RIGHT)
-        changeNodeTypeToNumberNode(node, cos(RIGHT_VALUE), changed);
+        changeNodeTypeToNumber(node, cos(RIGHT_VALUE), changed);
 
     if (*changed)
-    {
-        printLatexNode(node, LATEX_FILE);
-        fprintf(LATEX_FILE, "$\n");
-    }
+        endLatexFormula(node);
 }
 
-void changeNodeTypeToNumberNode(Node *node,
-                                double value,
-                                bool *changed)
+void moveNodeUp(Node *node,
+                Node *node_to_up,
+                Node *node_to_delete,
+                bool *changed)
+{
+    nodeDtor(node_to_delete);
+    LEFT_NODE = nullptr;
+    RIGHT_NODE = nullptr;
+    NODE_TYPE = node_to_up->node_type;
+    VALUE = node_to_up->value;
+    if (node_to_up->left)
+        LEFT_NODE = copyNode(node_to_up->left);
+    if (node_to_up->right)
+        RIGHT_NODE = copyNode(node_to_up->right);
+    nodeDtor(node_to_up);
+    *changed = true;
+}
+
+void changeNodeTypeToNumber(Node *node,
+                            double value,
+                            bool *changed)
 {
     *changed = true;
-
     nodeDtor(LEFT_NODE);
     nodeDtor(RIGHT_NODE);
     NODE_TYPE = NUMBER;
     VAL_VALUE = value;
     LEFT_NODE = nullptr;
     RIGHT_NODE = nullptr;
+}
+
+void startLatexFormula(const Node *node)
+{
+    fprintf(LATEX_FILE, "\n");
+    addRandomCringePhrase();
+
+    fprintf(LATEX_FILE, "\n");
+    fprintf(LATEX_FILE, "$");
+    printLatexNode(node, LATEX_FILE);
+}
+
+void endLatexFormula(const Node *node)
+{
+    printLatexNode(node, LATEX_FILE);
+    fprintf(LATEX_FILE, "$\n");
 }
 
 void getTangentEquation(Tree *tree,
