@@ -29,8 +29,7 @@ int main()
     getTangentEquation(&tree, &diff_tree, var_name, x);
     plotGraph(&tree, 'x', 1.1, 10, 1000, "graph.txt");
 
-    treeCtor(&diff_tree);
-    int n = 3;
+//    int n = 3;
 //    taylorN(tree.root, 'x', n);
 
     treeDtor(&tree);

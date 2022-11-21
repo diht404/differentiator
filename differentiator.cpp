@@ -41,6 +41,7 @@ void taylorN(Node *node, const char variable, int n)
     fprintf(LATEX_FILE, "\n\nTaylor of function\n\n");
     for (int i = 0; i < n; i++)
     {
+        //TODO: fix mem leak here
         node = diff(node, variable);
         simplifyNode(node);
     }
@@ -295,7 +296,7 @@ void deleteNeutralElements(Node *node, bool *changed)
         moveNodeUp(node, LEFT_NODE, RIGHT_NODE, changed);
     // 0 + f(x), 1 * f(x)
     else if ((IS_ZERO_LEFT && IS_OP(ADD_OP)) ||
-             (IS_ONE_LEFT && IS_OP(MUL_OP)))
+             (IS_ONE_LEFT  && IS_OP(MUL_OP)))
         moveNodeUp(node, RIGHT_NODE, LEFT_NODE, changed);
     // 0 - f(x)
     else if (IS_ZERO_LEFT && IS_OP(SUB_OP))
@@ -322,14 +323,17 @@ void moveNodeUp(Node *node,
                 bool *changed)
 {
     nodeDtor(node_to_delete);
+
     LEFT_NODE = nullptr;
     RIGHT_NODE = nullptr;
     NODE_TYPE = node_to_up->node_type;
     VALUE = node_to_up->value;
+
     if (node_to_up->left)
         LEFT_NODE = copyNode(node_to_up->left);
     if (node_to_up->right)
         RIGHT_NODE = copyNode(node_to_up->right);
+
     nodeDtor(node_to_up);
     *changed = true;
 }
@@ -338,13 +342,15 @@ void changeNodeTypeToNumber(Node *node,
                             double value,
                             bool *changed)
 {
-    *changed = true;
     nodeDtor(LEFT_NODE);
     nodeDtor(RIGHT_NODE);
+
     NODE_TYPE = NUMBER;
     VAL_VALUE = value;
     LEFT_NODE = nullptr;
     RIGHT_NODE = nullptr;
+
+    *changed = true;
 }
 
 void startLatexFormula(const Node *node)
