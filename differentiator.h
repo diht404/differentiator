@@ -80,7 +80,7 @@ Node *diffOperation(const Node *node, const char variable);
 
 Node *diffLog(const Node *node, const char variable);
 
-Node *diffPop(const Node *node, const char variable);
+Node *diffPow(const Node *node, const char variable);
 
 Node *copyNode(Node *node);
 

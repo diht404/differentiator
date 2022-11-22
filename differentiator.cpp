@@ -97,7 +97,7 @@ Node *diffOperation(const Node *node, const char variable)
                            MUL(cL, dR)),
                        MUL(cR, cR));
         case POW_OP:
-            return diffPop(node, variable);
+            return diffPow(node, variable);
         case LOG_OP:
             return diffLog(node, variable);
         case SIN_OP:
@@ -132,7 +132,7 @@ Node *diffLog(const Node *node, const char variable)
                        LOG(createNum(EXP), cL)));
 }
 
-Node *diffPop(const Node *node, const char variable)
+Node *diffPow(const Node *node, const char variable)
 {
     // a^b
     if (node->left->node_type == NUMBER &&
