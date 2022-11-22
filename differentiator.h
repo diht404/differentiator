@@ -82,13 +82,6 @@ Node *diffLog(const Node *node, const char variable);
 
 Node *diffPop(const Node *node, const char variable);
 
-Node *createNum(double value);
-
-Node *createNode(NodeType node_type,
-                 NodeValue node_value,
-                 Node *left_node,
-                 Node *right_node);
-
 Node *copyNode(Node *node);
 
 void simplifyNode(Node *node);
@@ -155,21 +148,5 @@ void printLatexOrdinaryNode(const Node *node,
 #define LOG(dL, dR) createNode(OPERATION, {.op_value = LOG_OP}, dL, dR)
 #define SIN(dL, dR) createNode(OPERATION, {.op_value = SIN_OP}, dL, dR)
 #define COS(dL, dR) createNode(OPERATION, {.op_value = COS_OP}, dL, dR)
-#define VALUE (node->value)
-#define VAL_VALUE (VALUE.val_value)
-#define OP_VALUE (VALUE.op_value)
-#define VAR_VALUE (VALUE.var_value)
-#define LEFT_NODE (node->left)
-#define RIGHT_NODE (node->right)
-#define NODE_TYPE (node->node_type)
-#define IS_OP(OPP) (NODE_TYPE == OPERATION && OP_VALUE == OPP)
-#define IS_NUM_LEFT (LEFT_NODE->node_type == NUMBER)
-#define IS_NUM_RIGHT (RIGHT_NODE->node_type == NUMBER)
-#define IS_ZERO_LEFT (IS_NUM_LEFT && abs(LEFT_VALUE) < EPS)
-#define IS_ZERO_RIGHT (IS_NUM_RIGHT && abs(RIGHT_VALUE) < EPS)
-#define IS_ONE_LEFT (IS_NUM_LEFT && abs(LEFT_VALUE - 1) < EPS)
-#define IS_ONE_RIGHT (IS_NUM_RIGHT && abs(RIGHT_VALUE - 1) < EPS)
-#define LEFT_VALUE (LEFT_NODE->value.val_value)
-#define RIGHT_VALUE (RIGHT_NODE->value.val_value)
 
 #endif //DIFFERENTIATOR__DIFFERENTIATOR_H

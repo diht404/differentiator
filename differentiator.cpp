@@ -42,8 +42,12 @@ void taylorN(Node *node, const char variable, int n)
     for (int i = 0; i < n; i++)
     {
         //TODO: fix mem leak here
-        node = diff(node, variable);
+        Node *new_node = diff(node, variable);
+        nodeDtor(node);
+        node = new_node;
         simplifyNode(node);
+        double value = calculateNode(node, variable, 2);
+//        fprintf(LATEX_FILE, "")
     }
 }
 
@@ -156,27 +160,6 @@ Node *diffPop(const Node *node, const char variable)
                    ADD(MUL(cR, dL),
                        MUL(MUL(cL, dR),
                            LOG(createNum(EXP), cL))));
-}
-
-Node *createNum(double value)
-{
-    Node *node = createNode(NUMBER,
-                            {.val_value = value},
-                            nullptr,
-                            nullptr);
-    return node;
-}
-
-Node *createNode(NodeType node_type,
-                 NodeValue node_value,
-                 Node *left_node,
-                 Node *right_node)
-{
-    Node *node = (Node *) calloc(1, sizeof(node[0]));
-    LEFT_NODE = left_node;
-    RIGHT_NODE = right_node;
-    NODE_TYPE = node_type;
-    VALUE = node_value;
 }
 
 Node *copyNode(Node *node)

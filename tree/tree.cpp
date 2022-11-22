@@ -54,10 +54,16 @@ size_t readTree(Tree *tree, const char *filename)
     char *tree_buffer = readFileToBuf(fp, &lenOfFile);
     fclose(fp);
 
-    char *readPtr = tree_buffer;
-    tree->root = readNode(&readPtr, &tree_buffer, lenOfFile);
+    const char *readPtr = tree_buffer;
+    tree->root = readRecursiveDescentNode(&readPtr);
+//    tree->root = readNode(&readPtr, &tree_buffer, lenOfFile);
     free(tree_buffer);
     return TREE_NO_ERRORS;
+}
+
+Node *readRecursiveDescentNode(const char **readPtr)
+{
+    return recursiveDescent(readPtr);
 }
 
 Node *readNode(char **readPtr, char **buffer, long lenOfFile)
@@ -164,4 +170,25 @@ Node *createNewNode(NodeType node_type,
     node->node_type = node_type;
     node->value = node_value;
     return node;
+}
+
+Node *createNum(double value)
+{
+    Node *node = createNode(NUMBER,
+                            {.val_value = value},
+                            nullptr,
+                            nullptr);
+    return node;
+}
+
+Node *createNode(NodeType node_type,
+                 NodeValue node_value,
+                 Node *left_node,
+                 Node *right_node)
+{
+    Node *node = (Node *) calloc(1, sizeof(node[0]));
+    LEFT_NODE = left_node;
+    RIGHT_NODE = right_node;
+    NODE_TYPE = node_type;
+    VALUE = node_value;
 }

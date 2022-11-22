@@ -27,13 +27,12 @@ int main()
            calculateNode(diff_tree.root, var_name, x));
 
     getTangentEquation(&tree, &diff_tree, var_name, x);
-    plotGraph(&tree, 'x', 1.1, 10, 1000, "graph.txt");
+    plotGraph(&tree, 'x', 0.1, 5, 10000, "graph.txt");
 
 //    int n = 3;
 //    taylorN(tree.root, 'x', n);
-
-    treeDtor(&tree);
     treeDtor(&diff_tree);
+    treeDtor(&tree);
     treeCloseLogFile();
     close_latex_file();
     return 0;
