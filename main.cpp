@@ -38,8 +38,6 @@ int main()
     return 0;
 }
 // TODO: print without ()
-// TODO: sin, cos, log
-// TODO: long variables
 // TODO: replace expressions
 // TODO: more variables diff
 // TODO: taylor, error rate
