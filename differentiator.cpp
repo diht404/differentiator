@@ -120,11 +120,11 @@ Node *diffLog(const Node *node, const char variable)
     if (node->left->node_type == NUMBER &&
         node->right->node_type == NUMBER)
         return createNum(0);
-        // log_a(f(x))
+    // log_a(f(x))
     else if (node->left->node_type == NUMBER &&
         node->right->node_type != NUMBER)
         return DIV(dR, MUL(LOG(createNum(EXP), cL), cR));
-        // log_f(x)(g(x))
+    // log_f(x)(g(x))
     else
         return DIV(SUB(DIV(MUL(LOG(createNum(EXP), cL), dR), cR),
                        DIV(MUL(LOG(createNum(EXP), cR), dL), cL)),
