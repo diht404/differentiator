@@ -135,6 +135,7 @@ void printLatexOrdinaryNode(const Node *node,
                             char node_value[BUFFER_SIZE],
                             FILE *fp);
 
+int getPriority(const Node *node);
 
 #define dL diff(node->left, variable)
 #define dR diff(node->right, variable)

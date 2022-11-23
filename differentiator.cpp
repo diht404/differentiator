@@ -75,8 +75,9 @@ Node *diff(const Node *node, const char variable)
             fprintf(stderr, "Unknown node type.\n");
             break;
     }
+//    fprintf(LATEX_FILE, "(");
     startLatexFormula(node);
-    fprintf(LATEX_FILE, "' = ");
+    fprintf(LATEX_FILE, ")' = ");
     endLatexFormula(return_node);
     return return_node;
 }
@@ -271,11 +272,12 @@ void deleteNeutralElements(Node *node, bool *changed)
                               IS_OP(MUL_OP) ||
                               IS_OP(DIV_OP)))
         changeNodeTypeToNumber(node, 0, changed);
-    // f(x) ^ 1, f(x) * 1, f(x) / 1, f(x) + 0
+    // f(x) ^ 1, f(x) * 1, f(x) / 1, f(x) + 0, f(x) - 0
     else if ((IS_ONE_RIGHT && (IS_OP(POW_OP) ||
                                IS_OP(MUL_OP) ||
                                IS_OP(DIV_OP)))
-            || (IS_ZERO_RIGHT && IS_OP(ADD_OP)))
+            || (IS_ZERO_RIGHT && (IS_OP(ADD_OP) ||
+                                  IS_OP(SUB_OP))))
         moveNodeUp(node, LEFT_NODE, RIGHT_NODE, changed);
     // 0 + f(x), 1 * f(x)
     else if ((IS_ZERO_LEFT && IS_OP(ADD_OP)) ||
@@ -342,7 +344,7 @@ void startLatexFormula(const Node *node)
     addRandomCringePhrase();
 
     fprintf(LATEX_FILE, "\n");
-    fprintf(LATEX_FILE, "$");
+    fprintf(LATEX_FILE, "$(");
     printLatexNode(node, LATEX_FILE);
 }
 
@@ -456,14 +458,14 @@ void printLatex(Tree *tree)
 {
     fprintf(LATEX_FILE, "$");
     printLatexNode(tree->root, LATEX_FILE);
-    fprintf(LATEX_FILE, "'$\n");
+    fprintf(LATEX_FILE, "$\n");
 }
 
 void printLatexNode(const Node *node, FILE *fp)
 {
     char node_value[BUFFER_SIZE] = "";
     getValueOfNode(node, &node_value);
-    if (node->node_type == NUMBER || node->node_type == VARIABLE)
+    if (NODE_TYPE == NUMBER || NODE_TYPE == VARIABLE)
         fprintf(fp, " %s ", node_value);
     else if (strcmp(node_value, "sin") == 0)
         printLatexSinNode(node, fp);
@@ -534,13 +536,36 @@ void printLatexOrdinaryNode(const Node *node,
                             char node_value[BUFFER_SIZE],
                             FILE *fp)
 {
-    fprintf(fp, "(");
+    if (LEFT_NODE->node_type == OPERATION &&
+        getPriority(node) > getPriority(LEFT_NODE))
+        fprintf(fp, "(");
     if (LEFT_NODE)
         printLatexNode(LEFT_NODE, fp);
-
+    if (LEFT_NODE->node_type == OPERATION &&
+        getPriority(node) > getPriority(LEFT_NODE))
+        fprintf(fp, ")");
     fprintf(fp, " %s ", node_value);
 
+    if (RIGHT_NODE->node_type == OPERATION &&
+        getPriority(node) > getPriority(RIGHT_NODE))
+        fprintf(fp, "(");
     if (RIGHT_NODE)
         printLatexNode(RIGHT_NODE, fp);
-    fprintf(fp, ")");
+    if (RIGHT_NODE->node_type == OPERATION &&
+        getPriority(node) > getPriority(RIGHT_NODE))
+        fprintf(fp, ")");
+
+}
+
+int getPriority(const Node *node)
+{
+    if (IS_OP(ADD_OP) || IS_OP(SUB_OP))
+        return 0;
+    if (IS_OP(MUL_OP) || IS_OP(DIV_OP))
+        return 1;
+    if (IS_OP(LOG_OP) || IS_OP(SIN_OP) || IS_OP(COS_OP))
+        return 2;
+    if (IS_OP(POW_OP))
+        return 3;
+    return -1;
 }

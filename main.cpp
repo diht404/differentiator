@@ -37,7 +37,7 @@ int main()
     close_latex_file();
     return 0;
 }
-// TODO: print without ()
+
 // TODO: replace expressions
 // TODO: more variables diff
 // TODO: taylor, error rate

@@ -1,1 +1,1 @@
-cos(x*8^x^4)*log(cos(x)+2)/(1+sin(x))
+sin(log(x))+log(6*x)^x^cos(x)+1000-7
