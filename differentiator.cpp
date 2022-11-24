@@ -335,24 +335,24 @@ void deleteNeutralElements(Node *node, bool *changed)
     // 1 ^ f(x), f(x) ^ 0
     if ((IS_ONE_LEFT || IS_ZERO_RIGHT) && IS_OP(POW_OP))
         changeNodeTypeToNumber(node, 1, changed);
-        // 0 ^ f(x), 0 * f(x), 0 / f(x), f(x) * 0
+    // 0 ^ f(x), 0 * f(x), 0 / f(x), f(x) * 0
     else if ((IS_ZERO_LEFT  && (IS_OP(POW_OP) ||
                                 IS_OP(MUL_OP) ||
                                 IS_OP(DIV_OP))) ||
              (IS_ZERO_RIGHT && IS_OP(MUL_OP)))
         changeNodeTypeToNumber(node, 0, changed);
-        // f(x) ^ 1, f(x) * 1, f(x) / 1, f(x) + 0, f(x) - 0
+    // f(x) ^ 1, f(x) * 1, f(x) / 1, f(x) + 0, f(x) - 0
     else if ((IS_ONE_RIGHT  && (IS_OP(POW_OP) ||
                                 IS_OP(MUL_OP) ||
                                 IS_OP(DIV_OP))) ||
              (IS_ZERO_RIGHT && (IS_OP(ADD_OP)||
                                 IS_OP(SUB_OP))))
         moveNodeUp(node, LEFT_NODE, RIGHT_NODE, changed);
-        // 0 + f(x), 1 * f(x)
+    // 0 + f(x), 1 * f(x)
     else if ((IS_ZERO_LEFT && IS_OP(ADD_OP)) ||
              (IS_ONE_LEFT && IS_OP(MUL_OP)))
         moveNodeUp(node, RIGHT_NODE, LEFT_NODE, changed);
-        // 0 - f(x)
+    // 0 - f(x)
     else if (IS_ZERO_LEFT && IS_OP(SUB_OP))
     {
         LEFT_VALUE = -1;
@@ -360,10 +360,10 @@ void deleteNeutralElements(Node *node, bool *changed)
         OP_VALUE = SUB_OP;
         *changed = true;
     }
-        // sin(number)
+    // sin(number)
     else if (IS_OP(SIN_OP) && IS_NUM_RIGHT)
         changeNodeTypeToNumber(node, sin(RIGHT_VALUE), changed);
-        // cos(number)
+    // cos(number)
     else if (IS_OP(COS_OP) && IS_NUM_RIGHT)
         changeNodeTypeToNumber(node, cos(RIGHT_VALUE), changed);
 
