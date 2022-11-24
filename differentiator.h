@@ -84,6 +84,8 @@ void printTaylorN(Node *node,
                   double x,
                   int n);
 
+void diffXYZ(Tree *tree, double x, double y, double z);
+
 Node *diff(const Node *node, const char variable);
 
 Node *diffOperation(const Node *node, const char variable);
@@ -125,7 +127,7 @@ void plotGraph(Tree *tree,
                size_t num,
                const char *filename);
 
-double calculateNode(Node *node, const char variable, double value);
+double calculateNode(Node *node, double x, double y, double z);
 
 void printLatex(Tree *tree);
 
@@ -146,6 +148,10 @@ void printLatexOrdinaryNode(const Node *node,
                             FILE *fp);
 
 int getPriority(const Node *node);
+
+double oneVariableCalculateNode(Node *node,
+                                const char variable,
+                                double value);
 
 #define dL diff(node->left, variable)
 #define dR diff(node->right, variable)

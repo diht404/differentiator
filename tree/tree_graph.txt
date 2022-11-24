@@ -1,9 +1,105 @@
 digraph TREE {
     rankdir=TB;
-    node_0x55ef68945fc0[shape="record", 
+    node_0x560fad1e5a10[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x560fad1e59e0} | {INDEX | 0x560fad1e5a10} | {RIGHT | 0x560fad1e5830}}}"]
+    node_0x560fad1e59e0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {cos |
+            {{LEFT | 0x560fad1e59b0} | {INDEX | 0x560fad1e59e0} | {RIGHT | 0x560fad1e5860}}}"]
+    node_0x560fad1e59b0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {0 |
-            {{LEFT | (nil)} | {INDEX | 0x55ef68945fc0} | {RIGHT | (nil)}}}"]
-}
+            {{LEFT | (nil)} | {INDEX | 0x560fad1e59b0} | {RIGHT | (nil)}}}"]
+    node_0x560fad1e5860[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {log |
+            {{LEFT | 0x560fad1e5890} | {INDEX | 0x560fad1e5860} | {RIGHT | 0x560fad1e58c0}}}"]
+    node_0x560fad1e5890[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {2.71828 |
+            {{LEFT | (nil)} | {INDEX | 0x560fad1e5890} | {RIGHT | (nil)}}}"]
+    node_0x560fad1e58c0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {+ |
+            {{LEFT | 0x560fad1e58f0} | {INDEX | 0x560fad1e58c0} | {RIGHT | 0x560fad1e5980}}}"]
+    node_0x560fad1e58f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x560fad1e5920} | {INDEX | 0x560fad1e58f0} | {RIGHT | 0x560fad1e5950}}}"]
+    node_0x560fad1e5920[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {x |
+            {{LEFT | (nil)} | {INDEX | 0x560fad1e5920} | {RIGHT | (nil)}}}"]
+    node_0x560fad1e5950[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {y |
+            {{LEFT | (nil)} | {INDEX | 0x560fad1e5950} | {RIGHT | (nil)}}}"]
+    node_0x560fad1e5980[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {z |
+            {{LEFT | (nil)} | {INDEX | 0x560fad1e5980} | {RIGHT | (nil)}}}"]
+    node_0x560fad1e5830[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {/ |
+            {{LEFT | 0x560fad1e5800} | {INDEX | 0x560fad1e5830} | {RIGHT | 0x560fad1e4a20}}}"]
+    node_0x560fad1e5800[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {1 |
+            {{LEFT | (nil)} | {INDEX | 0x560fad1e5800} | {RIGHT | (nil)}}}"]
+    node_0x560fad1e4a20[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {+ |
+            {{LEFT | 0x560fad1e49f0} | {INDEX | 0x560fad1e4a20} | {RIGHT | 0x560fad1e57a0}}}"]
+    node_0x560fad1e49f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x560fad1e4a50} | {INDEX | 0x560fad1e49f0} | {RIGHT | 0x560fad1e57d0}}}"]
+    node_0x560fad1e4a50[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {x |
+            {{LEFT | (nil)} | {INDEX | 0x560fad1e4a50} | {RIGHT | (nil)}}}"]
+    node_0x560fad1e57d0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {y |
+            {{LEFT | (nil)} | {INDEX | 0x560fad1e57d0} | {RIGHT | (nil)}}}"]
+    node_0x560fad1e57a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {z |
+            {{LEFT | (nil)} | {INDEX | 0x560fad1e57a0} | {RIGHT | (nil)}}}"]
+    node_0x560fad1e5a10->node_0x560fad1e59e0[color="#a66be8", fontcolor="#6be871"];    node_0x560fad1e59e0->node_0x560fad1e59b0[color="#a66be8", fontcolor="#6be871"];    node_0x560fad1e59e0->node_0x560fad1e5860[color="#a66be8", fontcolor="#e87b6b"];    node_0x560fad1e5860->node_0x560fad1e5890[color="#a66be8", fontcolor="#6be871"];    node_0x560fad1e5860->node_0x560fad1e58c0[color="#a66be8", fontcolor="#e87b6b"];    node_0x560fad1e58c0->node_0x560fad1e58f0[color="#a66be8", fontcolor="#6be871"];    node_0x560fad1e58f0->node_0x560fad1e5920[color="#a66be8", fontcolor="#6be871"];    node_0x560fad1e58f0->node_0x560fad1e5950[color="#a66be8", fontcolor="#e87b6b"];    node_0x560fad1e58c0->node_0x560fad1e5980[color="#a66be8", fontcolor="#e87b6b"];    node_0x560fad1e5a10->node_0x560fad1e5830[color="#a66be8", fontcolor="#e87b6b"];    node_0x560fad1e5830->node_0x560fad1e5800[color="#a66be8", fontcolor="#6be871"];    node_0x560fad1e5830->node_0x560fad1e4a20[color="#a66be8", fontcolor="#e87b6b"];    node_0x560fad1e4a20->node_0x560fad1e49f0[color="#a66be8", fontcolor="#6be871"];    node_0x560fad1e49f0->node_0x560fad1e4a50[color="#a66be8", fontcolor="#6be871"];    node_0x560fad1e49f0->node_0x560fad1e57d0[color="#a66be8", fontcolor="#e87b6b"];    node_0x560fad1e4a20->node_0x560fad1e57a0[color="#a66be8", fontcolor="#e87b6b"];}

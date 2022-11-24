@@ -43,7 +43,7 @@ void taylorN(Node *node, const char variable, double x, int n)
     double *taylor_coefficients =
         (double *) calloc((size_t) (n + 1),
                           sizeof(taylor_coefficients[0]));
-    taylor_coefficients[0] = calculateNode(node, variable, x);
+    taylor_coefficients[0] = oneVariableCalculateNode(node, variable, x);
 
     Node *diff_node = node;
     for (int i = 1; i < n + 1; i++)
@@ -53,7 +53,8 @@ void taylorN(Node *node, const char variable, double x, int n)
             nodeDtor(diff_node);
         diff_node = new_node;
         simplifyNode(diff_node);
-        taylor_coefficients[i] = calculateNode(diff_node, variable, x);
+        taylor_coefficients[i] =
+            oneVariableCalculateNode(diff_node, variable, x);
     }
     printTaylorN(node, taylor_coefficients, variable, x, n);
     nodeDtor(diff_node);
@@ -119,6 +120,46 @@ void printTaylorN(Node *node,
         fprintf(LATEX_FILE, "+ o(%c^%d)$\n\n", variable, n + 1);
 }
 
+void diffXYZ(Tree *tree, double x, double y, double z)
+{
+    Tree diff_x_tree = {};
+    treeCtor(&diff_x_tree);
+    diff_x_tree.root = diff(tree->root, 'x');
+    treeDump(&diff_x_tree);
+    simplifyNode(diff_x_tree.root);
+
+    Tree diff_y_tree = {};
+    treeCtor(&diff_y_tree);
+    diff_y_tree.root = diff(tree->root, 'y');
+    treeDump(&diff_y_tree);
+    simplifyNode(diff_y_tree.root);
+
+    Tree diff_z_tree = {};
+    treeCtor(&diff_z_tree);
+    diff_z_tree.root = diff(tree->root, 'z');
+    treeDump(&diff_z_tree);
+    simplifyNode(diff_z_tree.root);
+
+    fprintf(LATEX_FILE, "\n\n\\textbf{Answer:} \n\n$ ");
+    fprintf(LATEX_FILE, "f'_x = ");
+    printLatexNode(diff_x_tree.root, LATEX_FILE);
+    fprintf(LATEX_FILE, "$\n\n$f'_y = ");
+    printLatexNode(diff_y_tree.root, LATEX_FILE);
+    fprintf(LATEX_FILE, "$\n\n$f'_z = ");
+    printLatexNode(diff_z_tree.root, LATEX_FILE);
+    fprintf(LATEX_FILE, "$\n\n");
+
+    double dfdx = calculateNode(diff_x_tree.root, x, y, z);
+    double dfdy = calculateNode(diff_y_tree.root, x, y, z);
+    double dfdz = calculateNode(diff_z_tree.root, x, y, z);
+
+    fprintf(LATEX_FILE,
+            "$f'(%lg, %lg, %lg) = (%lg, %lg, %lg)$\n\n",
+            x, y, z, dfdx, dfdy, dfdz);
+    fprintf(LATEX_FILE, "$|f'(%lg, %lg, %lg)| = %lg$\n\n",
+            x, y, z, sqrt(x * x + y * y + z * z));
+}
+
 Node *diff(const Node *node, const char variable)
 {
     Node *return_node = nullptr;
@@ -145,7 +186,7 @@ Node *diff(const Node *node, const char variable)
     }
     //    fprintf(LATEX_FILE, "(");
     startLatexFormula(node, true);
-    fprintf(LATEX_FILE, ")' = ");
+    fprintf(LATEX_FILE, ")'_{%c} = ", variable);
     endLatexFormula(return_node);
     return return_node;
 }
@@ -268,6 +309,9 @@ void simplifyNode(Node *node)
         if (changed)
             treeDump(&tree);
     }
+    fprintf(LATEX_FILE, "\n\n\\textbf{Answer:}\n\n$");
+    printLatexNode(node, LATEX_FILE);
+    fprintf(LATEX_FILE, "$\n");
 }
 
 void convConst(Node *node, bool *changed)
@@ -429,8 +473,10 @@ void getTangentEquation(Tree *tree,
                         const char var_name,
                         double value)
 {
-    double f_at_value = calculateNode(tree->root, var_name, value);
-    double k = calculateNode(diff_tree->root, var_name, value);
+    double f_at_value =
+        oneVariableCalculateNode(tree->root, var_name, value);
+    double k =
+        oneVariableCalculateNode(diff_tree->root, var_name, value);
     fprintf(LATEX_FILE,
             "\n\n\\textbf{Tangent equation at %lg:}\n\n",
             value);
@@ -458,7 +504,7 @@ void plotGraph(Tree *tree,
     for (size_t i = 0; i < num; i++)
     {
         x = left + step * i;
-        f_at_x = calculateNode(tree->root, var_name, x);
+        f_at_x = oneVariableCalculateNode(tree->root, var_name, x);
         fprintf(fp, "%lf\t%lf\n", x, f_at_x);
     }
     fclose(fp);
@@ -473,26 +519,30 @@ void plotGraph(Tree *tree,
     system(command);
 }
 
-double calculateNode(Node *node, const char variable, double value)
+double calculateNode(Node *node, double x, double y, double z)
 {
     double leftValue = NAN;
     double rightValue = NAN;
 
     if (LEFT_NODE)
-        leftValue = calculateNode(LEFT_NODE, variable, value);
+        leftValue = calculateNode(LEFT_NODE, x, y, z);
     if (RIGHT_NODE)
-        rightValue = calculateNode(RIGHT_NODE, variable, value);
+        rightValue = calculateNode(RIGHT_NODE, x, y, z);
 
     if (NODE_TYPE == NUMBER)
         return node->value.val_value;
 
     if (NODE_TYPE == VARIABLE)
     {
-        if (VAR_VALUE == variable)
-            return value;
+        if (VAR_VALUE == 'x')
+            return x;
+        else if (VAR_VALUE == 'y')
+            return y;
+        else if (VAR_VALUE == 'z')
+            return z;
         else
         {
-            fprintf(stderr, "Unknown variable %c\n", variable);
+            fprintf(stderr, "Unknown variable %c\n", VAR_VALUE);
             return NAN;
         }
     }
@@ -638,4 +688,16 @@ int getPriority(const Node *node)
     if (IS_OP(POW_OP))
         return 3;
     return -1;
+}
+
+double oneVariableCalculateNode(Node *node,
+                                const char variable,
+                                double value)
+{
+    if (variable == 'x')
+        return calculateNode(node, value, 0, 0);
+    else if (variable == 'y')
+        return calculateNode(node, 0, value, 0);
+    else if (variable == 'z')
+        return calculateNode(node, 0, 0, value);
 }
