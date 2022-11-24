@@ -141,7 +141,7 @@ Node *diff(const Node *node, const char variable)
             break;
     }
     //    fprintf(LATEX_FILE, "(");
-    startLatexFormula(node);
+    startLatexFormula(node, true);
     fprintf(LATEX_FILE, ")' = ");
     endLatexFormula(return_node);
     return return_node;
@@ -279,7 +279,7 @@ void convConst(Node *node, bool *changed)
 
     if (*changed)
     {
-        startLatexFormula(node);
+        startLatexFormula(node, false);
         fprintf(LATEX_FILE, " = ");
     }
     if (IS_NUM_LEFT && IS_NUM_RIGHT)
@@ -326,7 +326,7 @@ void deleteNeutralElements(Node *node, bool *changed)
 
     if (*changed)
     {
-        startLatexFormula(node);
+        startLatexFormula(node, false);
         fprintf(LATEX_FILE, " = ");
     }
     // 1 ^ f(x), f(x) ^ 0
@@ -403,13 +403,14 @@ void changeNodeTypeToNumber(Node *node,
     *changed = true;
 }
 
-void startLatexFormula(const Node *node)
+void startLatexFormula(const Node *node, bool printStartBracket)
 {
     fprintf(LATEX_FILE, "\n");
     addRandomCringePhrase();
 
-    fprintf(LATEX_FILE, "\n");
-    fprintf(LATEX_FILE, "$(");
+    fprintf(LATEX_FILE, "\n$");
+    if (printStartBracket)
+        fprintf(LATEX_FILE, "(");
     printLatexNode(node, LATEX_FILE);
 }
 
