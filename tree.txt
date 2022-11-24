@@ -1,1 +1,1 @@
-sin(log(x*y+z))
+3^sin(log(x+10))
