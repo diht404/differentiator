@@ -36,19 +36,84 @@ size_t addRandomCringePhrase()
     fprintf(LATEX_FILE, "%s", CRINGE_PHRASES[rand() % len]);
 }
 
-void taylorN(Node *node, const char variable, int n)
+void taylorN(Node *node, const char variable, double x, int n)
 {
-    fprintf(LATEX_FILE, "\n\nTaylor of function\n\n");
-    for (int i = 0; i < n; i++)
+    fprintf(LATEX_FILE, "\n\n\\textbf{Taylor of function}\n\n");
+
+    double *taylor_coefficients =
+        (double *) calloc((size_t) (n + 1),
+                          sizeof(taylor_coefficients[0]));
+    taylor_coefficients[0] = calculateNode(node, variable, x);
+
+    Node *diff_node = node;
+    for (int i = 1; i < n + 1; i++)
     {
-        //TODO: fix mem leak here
-        Node *new_node = diff(node, variable);
-        nodeDtor(node);
-        node = new_node;
-        simplifyNode(node);
-        double value = calculateNode(node, variable, 2);
-//        fprintf(LATEX_FILE, "")
+        Node *new_node = diff(diff_node, variable);
+        if (i > 1)
+            nodeDtor(diff_node);
+        diff_node = new_node;
+        simplifyNode(diff_node);
+        taylor_coefficients[i] = calculateNode(diff_node, variable, x);
     }
+    printTaylorN(node, taylor_coefficients, variable, x, n);
+    nodeDtor(diff_node);
+    free(taylor_coefficients);
+}
+
+void printTaylorN(Node *node,
+                  double *taylor_coefficients,
+                  const char variable,
+                  double x,
+                  int n)
+{
+    fprintf(LATEX_FILE, "\n\n\\textbf{Answer:}\n\n$");
+    printLatexNode(node, LATEX_FILE);
+    fprintf(LATEX_FILE, " = ");
+
+    if (abs(taylor_coefficients[0]) > EPS)
+        fprintf(LATEX_FILE, "%lg", taylor_coefficients[0]);
+    for (int i = 1; i < n + 1; i++)
+    {
+        if (abs(taylor_coefficients[i]) < EPS)
+            continue;
+        if (i == 1)
+            if (abs(x) > EPS)
+                fprintf(LATEX_FILE,
+                        "%c %lg \\cdot (%c - %lg)",
+                        taylor_coefficients[i] > 0 ? '+' : ' ',
+                        taylor_coefficients[i],
+                        variable,
+                        x);
+            else
+                fprintf(LATEX_FILE,
+                         "%c %lg \\cdot %c",
+                         taylor_coefficients[i] > 0 ? '+' : ' ',
+                         taylor_coefficients[i],
+                         variable);
+        else
+            if (abs(x) > EPS)
+                fprintf(LATEX_FILE,
+                        "%c %lg \\frac{(%c - %lg)^{%d}}{%d!}",
+                        taylor_coefficients[i] > 0 ? '+' : ' ',
+                        taylor_coefficients[i],
+                        variable,
+                        x,
+                        i,
+                        i);
+            else
+                fprintf(LATEX_FILE,
+                        "%c %lg \\frac{%c^{%d}}{%d!}",
+                        taylor_coefficients[i] > 0 ? '+' : ' ',
+                        taylor_coefficients[i],
+                        variable,
+                        i,
+                        i);
+
+    }
+    if (abs(x) > EPS)
+        fprintf(LATEX_FILE, "+ o((%c - %lg)^%d)$\n\n", variable, x, n + 1);
+    else
+        fprintf(LATEX_FILE, "+ o(%c^%d)$\n\n", variable, n + 1);
 }
 
 Node *diff(const Node *node, const char variable)
@@ -75,7 +140,7 @@ Node *diff(const Node *node, const char variable)
             fprintf(stderr, "Unknown node type.\n");
             break;
     }
-//    fprintf(LATEX_FILE, "(");
+    //    fprintf(LATEX_FILE, "(");
     startLatexFormula(node);
     fprintf(LATEX_FILE, ")' = ");
     endLatexFormula(return_node);
@@ -121,11 +186,11 @@ Node *diffLog(const Node *node, const char variable)
     if (node->left->node_type == NUMBER &&
         node->right->node_type == NUMBER)
         return createNum(0);
-    // log_a(f(x))
+        // log_a(f(x))
     else if (node->left->node_type == NUMBER &&
         node->right->node_type != NUMBER)
         return DIV(dR, MUL(LOG(createNum(EXP), cL), cR));
-    // log_f(x)(g(x))
+        // log_f(x)(g(x))
     else
         return DIV(SUB(DIV(MUL(LOG(createNum(EXP), cL), dR), cR),
                        DIV(MUL(LOG(createNum(EXP), cR), dL), cL)),
@@ -267,23 +332,23 @@ void deleteNeutralElements(Node *node, bool *changed)
     // 1 ^ f(x), f(x) ^ 0
     if ((IS_ONE_LEFT || IS_ZERO_RIGHT) && IS_OP(POW_OP))
         changeNodeTypeToNumber(node, 1, changed);
-    // 0 ^ f(x), 0 * f(x), 0 / f(x)
+        // 0 ^ f(x), 0 * f(x), 0 / f(x)
     else if (IS_ZERO_LEFT && (IS_OP(POW_OP) ||
-                              IS_OP(MUL_OP) ||
-                              IS_OP(DIV_OP)))
+        IS_OP(MUL_OP) ||
+        IS_OP(DIV_OP)))
         changeNodeTypeToNumber(node, 0, changed);
-    // f(x) ^ 1, f(x) * 1, f(x) / 1, f(x) + 0, f(x) - 0
+        // f(x) ^ 1, f(x) * 1, f(x) / 1, f(x) + 0, f(x) - 0
     else if ((IS_ONE_RIGHT && (IS_OP(POW_OP) ||
-                               IS_OP(MUL_OP) ||
-                               IS_OP(DIV_OP)))
-            || (IS_ZERO_RIGHT && (IS_OP(ADD_OP) ||
-                                  IS_OP(SUB_OP))))
+        IS_OP(MUL_OP) ||
+        IS_OP(DIV_OP)))
+        || (IS_ZERO_RIGHT && (IS_OP(ADD_OP) ||
+            IS_OP(SUB_OP))))
         moveNodeUp(node, LEFT_NODE, RIGHT_NODE, changed);
-    // 0 + f(x), 1 * f(x)
+        // 0 + f(x), 1 * f(x)
     else if ((IS_ZERO_LEFT && IS_OP(ADD_OP)) ||
-             (IS_ONE_LEFT  && IS_OP(MUL_OP)))
+        (IS_ONE_LEFT && IS_OP(MUL_OP)))
         moveNodeUp(node, RIGHT_NODE, LEFT_NODE, changed);
-    // 0 - f(x)
+        // 0 - f(x)
     else if (IS_ZERO_LEFT && IS_OP(SUB_OP))
     {
         LEFT_VALUE = -1;
@@ -291,10 +356,10 @@ void deleteNeutralElements(Node *node, bool *changed)
         OP_VALUE = SUB_OP;
         *changed = true;
     }
-    // sin(number)
+        // sin(number)
     else if (IS_OP(SIN_OP) && IS_NUM_RIGHT)
         changeNodeTypeToNumber(node, sin(RIGHT_VALUE), changed);
-    // cos(number)
+        // cos(number)
     else if (IS_OP(COS_OP) && IS_NUM_RIGHT)
         changeNodeTypeToNumber(node, cos(RIGHT_VALUE), changed);
 
@@ -536,23 +601,23 @@ void printLatexOrdinaryNode(const Node *node,
                             char node_value[BUFFER_SIZE],
                             FILE *fp)
 {
-    if (LEFT_NODE->node_type == OPERATION &&
-        getPriority(node) > getPriority(LEFT_NODE))
+    bool require_left_bracket = LEFT_NODE->node_type == OPERATION &&
+        getPriority(node) > getPriority(LEFT_NODE);
+    if (require_left_bracket)
         fprintf(fp, "(");
     if (LEFT_NODE)
         printLatexNode(LEFT_NODE, fp);
-    if (LEFT_NODE->node_type == OPERATION &&
-        getPriority(node) > getPriority(LEFT_NODE))
+    if (require_left_bracket)
         fprintf(fp, ")");
     fprintf(fp, " %s ", node_value);
 
-    if (RIGHT_NODE->node_type == OPERATION &&
-        getPriority(node) > getPriority(RIGHT_NODE))
+    bool require_right_bracket = RIGHT_NODE->node_type == OPERATION &&
+        getPriority(node) > getPriority(RIGHT_NODE);
+    if (require_right_bracket)
         fprintf(fp, "(");
     if (RIGHT_NODE)
         printLatexNode(RIGHT_NODE, fp);
-    if (RIGHT_NODE->node_type == OPERATION &&
-        getPriority(node) > getPriority(RIGHT_NODE))
+    if (require_right_bracket)
         fprintf(fp, ")");
 
 }

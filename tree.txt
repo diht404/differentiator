@@ -1,1 +1,1 @@
-sin(log(x))+log(6*x)^x^cos(x)+1000-7
+3^sin(log(x+10))

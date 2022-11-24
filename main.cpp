@@ -29,8 +29,8 @@ int main()
     getTangentEquation(&tree, &diff_tree, var_name, x);
     plotGraph(&tree, 'x', 0.1, 5, 10000, "graph.txt");
 
-//    int n = 3;
-//    taylorN(tree.root, 'x', n);
+    int n = 3;
+    taylorN(tree.root, 'x', 0, n);
     treeDtor(&diff_tree);
     treeDtor(&tree);
     treeCloseLogFile();
@@ -40,4 +40,3 @@ int main()
 
 // TODO: replace expressions
 // TODO: more variables diff
-// TODO: taylor, error rate

@@ -72,7 +72,13 @@ size_t set_latex_file(const char *filename);
 
 size_t close_latex_file();
 
-void taylorN(Node *node, const char variable, int n);
+void taylorN(Node *node, const char variable, double x, int n);
+
+void printTaylorN(Node *node,
+                  double *taylor_coefficients,
+                  const char variable,
+                  double x,
+                  int n);
 
 Node *diff(const Node *node, const char variable);
 
