@@ -86,32 +86,35 @@ void printTaylorN(Node *node,
                         x);
             else
                 fprintf(LATEX_FILE,
-                         "%c %lg \\cdot %c",
-                         taylor_coefficients[i] > 0 ? '+' : ' ',
-                         taylor_coefficients[i],
-                         variable);
+                        "%c %lg \\cdot %c",
+                        taylor_coefficients[i] > 0 ? '+' : ' ',
+                        taylor_coefficients[i],
+                        variable);
+        else if (abs(x) > EPS)
+            fprintf(LATEX_FILE,
+                    "%c %lg \\frac{(%c - %lg)^{%d}}{%d!}",
+                    taylor_coefficients[i] > 0 ? '+' : ' ',
+                    taylor_coefficients[i],
+                    variable,
+                    x,
+                    i,
+                    i);
         else
-            if (abs(x) > EPS)
-                fprintf(LATEX_FILE,
-                        "%c %lg \\frac{(%c - %lg)^{%d}}{%d!}",
-                        taylor_coefficients[i] > 0 ? '+' : ' ',
-                        taylor_coefficients[i],
-                        variable,
-                        x,
-                        i,
-                        i);
-            else
-                fprintf(LATEX_FILE,
-                        "%c %lg \\frac{%c^{%d}}{%d!}",
-                        taylor_coefficients[i] > 0 ? '+' : ' ',
-                        taylor_coefficients[i],
-                        variable,
-                        i,
-                        i);
+            fprintf(LATEX_FILE,
+                    "%c %lg \\frac{%c^{%d}}{%d!}",
+                    taylor_coefficients[i] > 0 ? '+' : ' ',
+                    taylor_coefficients[i],
+                    variable,
+                    i,
+                    i);
 
     }
     if (abs(x) > EPS)
-        fprintf(LATEX_FILE, "+ o((%c - %lg)^%d)$\n\n", variable, x, n + 1);
+        fprintf(LATEX_FILE,
+                "+ o((%c - %lg)^%d)$\n\n",
+                variable,
+                x,
+                n + 1);
     else
         fprintf(LATEX_FILE, "+ o(%c^%d)$\n\n", variable, n + 1);
 }
@@ -333,20 +336,21 @@ void deleteNeutralElements(Node *node, bool *changed)
     if ((IS_ONE_LEFT || IS_ZERO_RIGHT) && IS_OP(POW_OP))
         changeNodeTypeToNumber(node, 1, changed);
         // 0 ^ f(x), 0 * f(x), 0 / f(x)
-    else if (IS_ZERO_LEFT && (IS_OP(POW_OP) ||
-        IS_OP(MUL_OP) ||
-        IS_OP(DIV_OP)))
+    else if ((IS_ZERO_LEFT  && (IS_OP(POW_OP) ||
+                                IS_OP(MUL_OP) ||
+                                IS_OP(DIV_OP))) ||
+             (IS_ZERO_RIGHT && IS_OP(MUL_OP)))
         changeNodeTypeToNumber(node, 0, changed);
         // f(x) ^ 1, f(x) * 1, f(x) / 1, f(x) + 0, f(x) - 0
-    else if ((IS_ONE_RIGHT && (IS_OP(POW_OP) ||
-        IS_OP(MUL_OP) ||
-        IS_OP(DIV_OP)))
-        || (IS_ZERO_RIGHT && (IS_OP(ADD_OP) ||
-            IS_OP(SUB_OP))))
+    else if ((IS_ONE_RIGHT  && (IS_OP(POW_OP) ||
+                                IS_OP(MUL_OP) ||
+                                IS_OP(DIV_OP))) ||
+             (IS_ZERO_RIGHT && (IS_OP(ADD_OP)||
+                                IS_OP(SUB_OP))))
         moveNodeUp(node, LEFT_NODE, RIGHT_NODE, changed);
         // 0 + f(x), 1 * f(x)
     else if ((IS_ZERO_LEFT && IS_OP(ADD_OP)) ||
-        (IS_ONE_LEFT && IS_OP(MUL_OP)))
+             (IS_ONE_LEFT && IS_OP(MUL_OP)))
         moveNodeUp(node, RIGHT_NODE, LEFT_NODE, changed);
         // 0 - f(x)
     else if (IS_ZERO_LEFT && IS_OP(SUB_OP))
