@@ -335,7 +335,7 @@ void deleteNeutralElements(Node *node, bool *changed)
     // 1 ^ f(x), f(x) ^ 0
     if ((IS_ONE_LEFT || IS_ZERO_RIGHT) && IS_OP(POW_OP))
         changeNodeTypeToNumber(node, 1, changed);
-        // 0 ^ f(x), 0 * f(x), 0 / f(x)
+        // 0 ^ f(x), 0 * f(x), 0 / f(x), f(x) * 0
     else if ((IS_ZERO_LEFT  && (IS_OP(POW_OP) ||
                                 IS_OP(MUL_OP) ||
                                 IS_OP(DIV_OP))) ||
