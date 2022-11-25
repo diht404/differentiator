@@ -16,7 +16,7 @@
 // getLog ::= {["log("]? getSin} | getSin
 // getSin ::= {["sin("]? getCos} | getCos
 // getCos ::= {["cos("]? getBrackets} | getBrackets
-// getBrackets ::= '(' getAddSub ')' | getValue
+// getPrimaryExpression ::= '(' getAddSub ')' | getValue | getVariable
 // getValue ::= [double] | getVariable
 // getVariable ::= ['x'-'z', 'X'-'Z']
 
@@ -34,7 +34,7 @@ Node *getSin(const char **program);
 
 Node *getCos(const char **program);
 
-Node *getBrackets(const char **program);
+Node *getPrimaryExpression(const char **program);
 
 Node *getValue(const char **program);
 

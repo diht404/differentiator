@@ -24,6 +24,7 @@ const char LATEX_START_DOCUMENT[] =
     "\\usepackage{amsfonts}\n"
     "\\usepackage{amsmath}\n"
     "\\usepackage{hyperref}\n"
+    "\\usepackage{graphicx}\n"
     "\n"
     "\\oddsidemargin=6mm\n"
     "\n"

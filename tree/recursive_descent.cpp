@@ -160,19 +160,19 @@ Node *getCos(const char **program)
         ASSERT_OK(**program == '(',
                   "Expected (, but got _%c_\n",
                   **program)
-        value = getBrackets(program);
+        value = getPrimaryExpression(program);
         value = createNewNode(OPERATION,
                               {.op_value = COS_OP},
                               nullptr,
                               value);
     }
     else
-        value = getBrackets(program);
+        value = getPrimaryExpression(program);
 
     return value;
 }
 
-Node *getBrackets(const char **program)
+Node *getPrimaryExpression(const char **program)
 {
     assert(program != nullptr);
     assert(*program != nullptr);
@@ -189,6 +189,8 @@ Node *getBrackets(const char **program)
                   **program)
         (*program)++;
     }
+    else if (isalpha(**program))
+        value = getVariable(program);
     else
         value = getValue(program);
 
@@ -201,9 +203,6 @@ Node *getValue(const char **program)
     assert(*program != nullptr);
 
     const char *startPtr = *program;
-
-    if (isalpha(**program))
-        return getVariable(program);
 
     double number = NAN;
     int len = 0;

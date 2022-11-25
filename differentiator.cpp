@@ -511,12 +511,13 @@ void plotGraph(Tree *tree,
 
     char command[BUFFER_SIZE] = "";
     sprintf(command,
-            "gnuplot -e \"set terminal png size 768,480; "
+            "gnuplot -e \"set terminal png size 480,360; "
             "set output 'graph.png'; plot [%lg: %lg] '%s'\"",
             left,
             right,
             filename);
     system(command);
+    fprintf(LATEX_FILE, "\n\n\\includegraphics{./graph.png} \n\n");
 }
 
 double calculateNode(Node *node, double x, double y, double z)
@@ -664,7 +665,11 @@ void printLatexOrdinaryNode(const Node *node,
         printLatexNode(LEFT_NODE, fp);
     if (require_left_bracket)
         fprintf(fp, ")");
-    fprintf(fp, " %s ", node_value);
+
+    if (strcmp(node_value, "*") == 0)
+        fprintf(fp, " \\cdot ");
+    else
+        fprintf(fp, " %s ", node_value);
 
     bool require_right_bracket = RIGHT_NODE->node_type == OPERATION &&
         getPriority(node) > getPriority(RIGHT_NODE);
