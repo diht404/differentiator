@@ -1,9 +1,9 @@
 digraph TREE {
     rankdir=TB;
-    node_0x5623d837ee40[shape="record", 
+    node_0x5637ef64f190[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {0 |
-            {{LEFT | (nil)} | {INDEX | 0x5623d837ee40} | {RIGHT | (nil)}}}"]
+            {{LEFT | (nil)} | {INDEX | 0x5637ef64f190} | {RIGHT | (nil)}}}"]
 }

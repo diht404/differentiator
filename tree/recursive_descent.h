@@ -8,6 +8,17 @@
 #include "cmath"
 #include "tree.h"
 
+// recursiveDescent ::= getAddSub '\0'
+// getAddSub ::= getMulDiv {['+', '-'] getMulDiv}*
+// getMulDiv ::= getPow {['+', '-'] getPow}*
+// getPow ::= getLog {['^'] getPow}*
+// getLog ::= {["log("]? getSin} | getSin
+// getSin ::= {["sin("]? getCos} | getCos
+// getCos ::= {["cos("]? getBrackets} | getBrackets
+// getBrackets ::= '(' getAddSub ')' | getValue
+// getValue ::= [double] | getVariable
+// getVariable ::= ['x'-'z', 'X'-'Z']
+
 Node *recursiveDescent(const char **program);
 
 Node *getAddSub(const char **program);
@@ -28,11 +39,11 @@ Node *getValue(const char **program);
 
 Node *getVariable(const char **program);
 
-#define ASSERT_OK(value, error, ...)                                \
-        if (!(value))                                               \
-        {                                                           \
-            fprintf(stderr, "Error occured: " error, ##__VA_ARGS__);\
-            abort();                                                \
+#define ASSERT_OK(value, error, ...)                                 \
+        if (!(value))                                                \
+        {                                                            \
+            fprintf(stderr, "Error occurred: " error, ##__VA_ARGS__);\
+            abort();                                                 \
         }
 
 #endif //RECURSIVE_DESCENT__RECURSIVE_DESCENT_H
