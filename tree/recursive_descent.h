@@ -12,7 +12,7 @@
 // recursiveDescent ::= getAddSub '\0'
 // getAddSub ::= getMulDiv {['+', '-'] getMulDiv}*
 // getMulDiv ::= getPow {['+', '-'] getPow}*
-// getPow ::= getLog {['^'] getPow}*
+// getPow ::= getLog {getPow ['^'] getLog}*
 // getLog ::= {["log("]? getSin} | getSin
 // getSin ::= {["sin("]? getCos} | getCos
 // getCos ::= {["cos("]? getBrackets} | getBrackets
