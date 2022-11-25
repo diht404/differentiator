@@ -39,11 +39,11 @@ Node *getValue(const char **program);
 
 Node *getVariable(const char **program);
 
-#define ASSERT_OK(value, error, ...)                                 \
-        if (!(value))                                                \
-        {                                                            \
-            fprintf(stderr, "Error occurred: " error, ##__VA_ARGS__);\
-            abort();                                                 \
+#define ASSERT_OK(value, error, ...)                                  \
+        if (!(value))                                                 \
+        {                                                             \
+            fprintf(stderr, "Error occurred: " error, ##__VA_ARGS__); \
+            abort();                                                  \
         }
 
 #endif //RECURSIVE_DESCENT__RECURSIVE_DESCENT_H

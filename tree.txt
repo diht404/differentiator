@@ -1,1 +1,1 @@
-log(sin(x))
+sinx
