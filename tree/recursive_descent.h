@@ -8,6 +8,7 @@
 #include "cmath"
 #include "tree.h"
 
+// grammar of recurrent descent
 // recursiveDescent ::= getAddSub '\0'
 // getAddSub ::= getMulDiv {['+', '-'] getMulDiv}*
 // getMulDiv ::= getPow {['+', '-'] getPow}*
