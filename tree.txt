@@ -1,1 +1,1 @@
-cos(x*8^x^4)*log(cos(x)+2)/(1+sin(x))
+sin(x^5)+cos(5*x)^2

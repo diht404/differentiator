@@ -194,5 +194,9 @@ Node *createNode(NodeType node_type,
 #define IS_ONE_RIGHT (IS_NUM_RIGHT && abs(RIGHT_VALUE - 1) < EPS)
 #define LEFT_VALUE (LEFT_NODE->value.val_value)
 #define RIGHT_VALUE (RIGHT_NODE->value.val_value)
+#define LEFT_TYPE LEFT_NODE->node_type
+#define RIGHT_TYPE RIGHT_NODE->node_type
+#define IS_LEFT_TYPE(TYPE) ((LEFT_TYPE) == (TYPE))
+#define IS_RIGHT_TYPE(TYPE) ((RIGHT_TYPE) == (TYPE))
 
 #endif //DIFFERENTIATOR__TREE_H

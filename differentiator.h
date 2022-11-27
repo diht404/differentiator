@@ -148,6 +148,8 @@ void printLatexOrdinaryNode(const Node *node,
                             char node_value[BUFFER_SIZE],
                             FILE *fp);
 
+bool printLatexRequireBrackets(Node *node);
+
 int getPriority(const Node *node);
 
 double oneVariableCalculateNode(Node *node,

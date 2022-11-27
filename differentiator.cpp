@@ -80,14 +80,14 @@ void printTaylorN(Node *node,
         if (i == 1)
             if (abs(x) > EPS)
                 fprintf(LATEX_FILE,
-                        "%c %lg \\cdot (%c - %lg)",
+                        "%c %lg (%c - %lg)",
                         taylor_coefficients[i] > 0 ? '+' : ' ',
                         taylor_coefficients[i],
                         variable,
                         x);
             else
                 fprintf(LATEX_FILE,
-                        "%c %lg \\cdot %c",
+                        "%c %lg %c",
                         taylor_coefficients[i] > 0 ? '+' : ' ',
                         taylor_coefficients[i],
                         variable);
@@ -193,7 +193,7 @@ Node *diff(const Node *node, const char variable)
 
 Node *diffOperation(const Node *node, const char variable)
 {
-    switch (node->value.op_value)
+    switch (OP_VALUE)
     {
         case ADD_OP:
             return ADD(dL, dR);
@@ -227,12 +227,12 @@ Node *diffOperation(const Node *node, const char variable)
 Node *diffLog(const Node *node, const char variable)
 {
     // log_a(b)
-    if (node->left->node_type == NUMBER &&
-        node->right->node_type == NUMBER)
+    if (IS_LEFT_TYPE(NUMBER) &&
+        IS_RIGHT_TYPE(NUMBER))
         return createNum(0);
         // log_a(f(x))
-    else if (node->left->node_type == NUMBER &&
-        node->right->node_type != NUMBER)
+    else if (IS_LEFT_TYPE(NUMBER) &&
+        !IS_RIGHT_TYPE(NUMBER))
         return DIV(dR, MUL(LOG(createNum(EXP), cL), cR));
         // log_f(x)(g(x))
     else
@@ -245,23 +245,23 @@ Node *diffLog(const Node *node, const char variable)
 Node *diffPow(const Node *node, const char variable)
 {
     // a^b
-    if (node->left->node_type == NUMBER &&
-        node->right->node_type == NUMBER)
+    if (IS_LEFT_TYPE(NUMBER) &&
+        IS_RIGHT_TYPE(NUMBER))
         return createNum(0);
         // f(x)^1
-    else if (node->left->node_type != NUMBER &&
-        node->right->node_type == NUMBER &&
-        abs(node->right->value.val_value - 1) < EPS)
+    else if (!IS_LEFT_TYPE(NUMBER) &&
+              IS_RIGHT_TYPE(NUMBER) &&
+              abs(RIGHT_VALUE - 1) < EPS)
         return dL;
         // f(x)^a, a != 1
-    else if (node->left->node_type != NUMBER &&
-        node->right->node_type == NUMBER &&
-        abs(node->right->value.val_value - 1) >= EPS)
+    else if (!IS_LEFT_TYPE(NUMBER) &&
+              IS_RIGHT_TYPE(NUMBER) &&
+              abs(RIGHT_VALUE - 1) >= EPS)
         return MUL(MUL(cR, dL),
                    POW(cL, SUB(cR, createNum(1))));
         // a^f(x)
-    else if (node->left->node_type == NUMBER &&
-        node->right->node_type != NUMBER)
+    else if (IS_LEFT_TYPE(NUMBER) &&
+             IS_RIGHT_TYPE(NUMBER))
         return MUL(MUL(LOG(createNum(EXP), cL), dR),
                    POW(cL, cR));
         // f(x)^g(x)
@@ -604,18 +604,30 @@ void printLatexNode(const Node *node, FILE *fp)
 
 void printLatexSinNode(const Node *node, FILE *fp)
 {
-    fprintf(fp, "sin(");
+    fprintf(fp, "sin");
     if (RIGHT_NODE)
-        printLatexNode(RIGHT_NODE, fp);
-    fprintf(fp, ")");
+        if (printLatexRequireBrackets(RIGHT_NODE))
+            printLatexNode(RIGHT_NODE, fp);
+        else
+        {
+            fprintf(fp, "(");
+            printLatexNode(RIGHT_NODE, fp);
+            fprintf(fp, ")");
+        }
 }
 
 void printLatexCosNode(const Node *node, FILE *fp)
 {
-    fprintf(fp, "cos(");
+    fprintf(fp, "cos");
     if (RIGHT_NODE)
-        printLatexNode(RIGHT_NODE, fp);
-    fprintf(fp, ")");
+        if (printLatexRequireBrackets(RIGHT_NODE))
+            printLatexNode(RIGHT_NODE, fp);
+        else
+        {
+            fprintf(fp, "(");
+            printLatexNode(RIGHT_NODE, fp);
+            fprintf(fp, ")");
+        }
 }
 
 void printLatexLogNode(const Node *node, FILE *fp)
@@ -657,7 +669,7 @@ void printLatexOrdinaryNode(const Node *node,
                             char node_value[BUFFER_SIZE],
                             FILE *fp)
 {
-    bool require_left_bracket = LEFT_NODE->node_type == OPERATION &&
+    bool require_left_bracket = IS_LEFT_TYPE(OPERATION) &&
         getPriority(node) > getPriority(LEFT_NODE);
     if (require_left_bracket)
         fprintf(fp, "(");
@@ -667,11 +679,25 @@ void printLatexOrdinaryNode(const Node *node,
         fprintf(fp, ")");
 
     if (strcmp(node_value, "*") == 0)
-        fprintf(fp, " \\cdot ");
+    {
+        if (RIGHT_NODE->left)
+        {
+            if (IS_LEFT_TYPE(NUMBER)
+                && RIGHT_NODE->left->node_type == VARIABLE);
+            else
+                fprintf(fp, " \\cdot ");
+        }
+        else
+        {
+            if (IS_LEFT_TYPE(NUMBER) && !IS_RIGHT_TYPE(NUMBER));
+            else
+                fprintf(fp, " \\cdot ");
+        }
+    }
     else
         fprintf(fp, " %s ", node_value);
 
-    bool require_right_bracket = RIGHT_NODE->node_type == OPERATION &&
+    bool require_right_bracket = IS_RIGHT_TYPE(OPERATION) &&
         getPriority(node) > getPriority(RIGHT_NODE);
     if (require_right_bracket)
         fprintf(fp, "(");
@@ -679,7 +705,13 @@ void printLatexOrdinaryNode(const Node *node,
         printLatexNode(RIGHT_NODE, fp);
     if (require_right_bracket)
         fprintf(fp, ")");
+}
 
+bool printLatexRequireBrackets(Node *node)
+{
+    return (!(node->node_type == OPERATION)) ||
+        ((!(node->left->node_type == OPERATION)) &&
+            (!(node->right->node_type == OPERATION)));
 }
 
 int getPriority(const Node *node)
