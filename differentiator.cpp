@@ -478,13 +478,13 @@ void getTangentEquation(Tree *tree,
     double k =
         oneVariableCalculateNode(diff_tree->root, var_name, value);
     fprintf(LATEX_FILE,
-            "\n\n\\textbf{Tangent equation at %lg:}\n\n",
+            "\n\n\\textbf{Tangent equation at x = %lg:}\n\n",
             value);
     if (abs(k) < EPS)
         fprintf(LATEX_FILE, "$y = %lg$\n", f_at_value);
     else
         fprintf(LATEX_FILE,
-                "$y = %lg * x + %lg$\n",
+                "$y = %lg \\cdot x + %lg$\n",
                 k,
                 f_at_value - k * value);
 }
@@ -604,7 +604,7 @@ void printLatexNode(const Node *node, FILE *fp)
 
 void printLatexSinNode(const Node *node, FILE *fp)
 {
-    fprintf(fp, "sin");
+    fprintf(fp, "\\sin");
     if (RIGHT_NODE)
         if (printLatexRequireBrackets(RIGHT_NODE))
             printLatexNode(RIGHT_NODE, fp);
@@ -618,7 +618,7 @@ void printLatexSinNode(const Node *node, FILE *fp)
 
 void printLatexCosNode(const Node *node, FILE *fp)
 {
-    fprintf(fp, "cos");
+    fprintf(fp, "\\cos");
     if (RIGHT_NODE)
         if (printLatexRequireBrackets(RIGHT_NODE))
             printLatexNode(RIGHT_NODE, fp);
